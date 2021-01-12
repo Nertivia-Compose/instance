@@ -19,7 +19,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
-src/config.js
 
 # yarn instead of npm
 yarn.lock

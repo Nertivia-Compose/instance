@@ -44,11 +44,9 @@ app.use(serveStatic(path.join(__dirname, "..", "files"), {
   setHeaders: headerControl
 }))
 
-
 function headerControl (res, p) {
   if (!serveStatic.mime.lookup(p).startsWith('image')) {
     res.setHeader('Content-disposition', 'attachment; filename=' + path.basename(p));
-    
 } else {
       res.set('Cache-Control', 'public, max-age=31536000');
   }

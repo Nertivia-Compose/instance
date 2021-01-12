@@ -1,4 +1,4 @@
 compose-dev.sh
 .env
 cdn/node/package-lock.json
-cdn/node/node_modules
+cdn/node/node_modules/
