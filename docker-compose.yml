@@ -1,0 +1,62 @@
+version: "3.3"
+services:
+  redis:
+    image: redis
+    networks:
+      - shared
+  mongo:
+    image: mongo:4.2.11
+    volumes:
+      - mongodata:/data/db
+    ports:
+      - "127.0.0.1:${VUE_APP_MONGODB_PORT}:27017"
+    networks:
+      - shared
+  server:
+    image: nertivia/server
+    ports:
+      - "${VUE_APP_SERVER_PORT}:${VUE_APP_SERVER_PORT}"
+    env_file: .env
+    networks:
+      - shared
+  client:
+    image: nertivia/client
+    ports:
+      - "${VUE_APP_CLIENT_PORT}:${VUE_APP_CLIENT_PORT}"
+    env_file: .env
+    networks:
+      - shared
+  cdn:
+    image: nertivia/cdn
+    hostname: cdn.localtest.me
+    env_file: .env
+    volumes:
+      - "./cdn:/cdn"
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - shared
+  php:
+    image: php:fpm
+    volumes:
+      - "./cdn:/cdn"
+    env_file: .env
+    networks:
+      - shared
+  image-server:
+    image: node
+    working_dir: /cdn/node
+    command: bash -c "npm i && node app.js"
+    volumes:
+      - "./cdn:/cdn"
+    ports:
+      - "${VUE_APP_CDN_PORT}:${VUE_APP_CDN_PORT}"
+    env_file: .env
+    networks:
+      - shared
+volumes:
+  mongodata:
+  cdn:
+networks:
+  shared:
