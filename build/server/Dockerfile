@@ -1,7 +1,7 @@
-FROM node
+FROM node:lts-alpine
 COPY . .
-RUN apt update && apt install -y \
-imagemagick-6.q16 webp
+RUN apk add \
+imagemagick libwebp
 RUN mkdir dist dist/public dist/public/avatars dist/public/temp
 RUN npm i
 RUN npm i -g typescript

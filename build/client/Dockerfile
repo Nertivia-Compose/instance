@@ -1,4 +1,4 @@
-FROM node
+FROM node:lts-alpine
 COPY . .
 RUN npm i
 RUN npm i -g vue
