@@ -45,7 +45,7 @@ services:
     networks:
       - shared
   image-server:
-    image: node
+    image: node:lts-alpine
     working_dir: /cdn/node
     command: bash -c "npm i && node app.js"
     volumes:
