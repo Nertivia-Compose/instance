@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   redis:
-    image: redis
+    image: redis:alpine
     networks:
       - shared
   mongo:
@@ -38,7 +38,7 @@ services:
     networks:
       - shared
   php:
-    image: php:fpm
+    image: php:fpm-alpine
     volumes:
       - "./cdn:/cdn"
     env_file: .env
