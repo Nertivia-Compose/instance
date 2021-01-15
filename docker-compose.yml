@@ -47,7 +47,7 @@ services:
   image-server:
     image: node:lts-alpine
     working_dir: /cdn/node
-    command: bash -c "npm i && node app.js"
+    command: sh -c "npm i && node app.js"
     volumes:
       - "./cdn:/cdn"
     ports:

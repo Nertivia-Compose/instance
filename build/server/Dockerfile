@@ -1,6 +1,6 @@
 FROM node:lts-alpine
 COPY . .
-RUN apk add \
+RUN apk add --no-cache \
 imagemagick libwebp
 RUN mkdir dist dist/public dist/public/avatars dist/public/temp
 RUN npm i
