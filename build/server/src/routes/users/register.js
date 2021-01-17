@@ -18,7 +18,7 @@ module.exports = async (req, res, next) => {
   let { username, email, password } = req.body;
 
   username = username.replace(
-    /[\xA0\x00-\x09\x0B\x0C\x0E-\x1F\x7F\u{2000}-\u{200F}\u{202F}\u{2800}]/gu,
+    /[\xA0\x00-\x09\x0B\x0C\x0E-\x1F\x7F\u{2000}-\u{200F}\u{202F}\u{2800}\u{17B5}\u{17B5}\u{17B5}\u{17B5}\u{17B5}\u{17B5}]/gu,
     ""
   );
     // check if result is empty
@@ -50,7 +50,7 @@ module.exports = async (req, res, next) => {
   }
 
   // check if the email really exists
-  const emailExists = await validate({email, validateTypo: false});
+  const emailExists = await validate({email, validateTypo: false, validateSMTP: false});
 
   if (!emailExists.valid) {
     return res.status(403).json({
