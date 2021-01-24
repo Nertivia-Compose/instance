@@ -1,0 +1,28 @@
+{$VUE_APP_CLIENT_DOMAIN} {
+  #  tls /ssl_certs/localtest.me+1.pem /ssl_certs/localtest.me+1-key.pem
+    reverse_proxy client:{$VUE_APP_CLIENT_PORT}
+}
+
+{$VUE_APP_SERVER_DOMAIN} {
+   # tls /ssl_certs/localtest.me+1.pem /ssl_certs/localtest.me+1-key.pem
+    reverse_proxy server:{$VUE_APP_SERVER_PORT}
+}
+
+{$VUE_APP_CDN_DOMAIN} {
+    #tls /ssl_certs/localtest.me+1.pem /ssl_certs/localtest.me+1-key.pem
+    root * /public_html
+    encode gzip
+
+    # for .php files to work
+    route /*.php {
+        php_fastcgi php:9000
+        file_server
+    }
+
+    # / route
+    route / {
+        file_server
+    }
+
+    reverse_proxy image-server:{$VUE_APP_CDN_PORT}
+}

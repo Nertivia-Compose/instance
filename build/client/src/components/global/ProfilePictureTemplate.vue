@@ -69,7 +69,7 @@ export default {
   ],
   data() {
     return {
-      nertiviaCDN: config.nertiviaCDN
+      nertiviaCDN: `${config.nertiviaCDN}/`
     };
   },
   computed: {
@@ -83,7 +83,7 @@ export default {
       if (this.url) {
         return this.url;
       }
-      return config.nertiviaCDN + this.avatar;
+      return `${config.nertiviaCDN}/` + this.avatar;
     },
     isGif() {
       if (!this.avatar) return undefined;

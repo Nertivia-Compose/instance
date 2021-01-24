@@ -52,7 +52,7 @@ export default {
   components: {},
   data() {
     return {
-      domain: config.nertiviaCDN + "emojis/"
+      domain: config.nertiviaCDN + "/emojis/"
     };
   },
   methods: {

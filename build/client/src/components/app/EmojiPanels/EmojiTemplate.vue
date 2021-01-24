@@ -23,7 +23,7 @@ export default {
   props: ["emoji"],
   data() {
     return {
-      customEmojiUrl: config.nertiviaCDN + "emojis/"
+      customEmojiUrl: config.nertiviaCDN + "/emojis/"
     };
   }
 };

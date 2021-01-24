@@ -237,7 +237,7 @@ export default {
       user: null,
       commonServersIDArr: null,
       commonFriendsIDArr: null,
-      avatarDomain: config.nertiviaCDN,
+      avatarDomain: `${config.nertiviaCDN}/`,
       badges,
       isBlocked: null
     };

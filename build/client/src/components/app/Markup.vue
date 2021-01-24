@@ -428,7 +428,7 @@ export default {
             <img
               class="emoji custom-emoji"
               title={entity.name}
-              src={`${config.nertiviaCDN}emojis/${entity.id}.${
+              src={`${config.nertiviaCDN}/emojis/${entity.id}.${
                 entity.isAnimated ? "gif" : "png"
               }`}
               alt={entity.name}

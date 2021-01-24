@@ -37,7 +37,7 @@ export default {
   components: { Spinner, ProfilePicture },
   data() {
     return {
-      CDNDomain: config.nertiviaCDN,
+      CDNDomain: `${config.nertiviaCDN}/`,
       unbanStatus: false,
       bans: null
     };

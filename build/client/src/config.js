@@ -6,8 +6,8 @@ const config = {
   nertiviaCDN: process.env.VUE_APP_CDN_DOMAIN,
   IP: [
     {
-      domain: `${process.env.VUE_APP_SERVER_DOMAIN}:${process.env.VUE_APP_SERVER_PORT}/api`,
-      socketIP: `${process.env.VUE_APP_SERVER_DOMAIN}:${process.env.VUE_APP_SERVER_PORT}`
+      domain: `${process.env.VUE_APP_SERVER_DOMAIN}/api`,
+      socketIP: `${process.env.VUE_APP_SERVER_DOMAIN}`
     }
   ]
 }

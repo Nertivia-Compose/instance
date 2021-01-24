@@ -30,7 +30,7 @@ export default {
   props: ["emojiArray"],
   data() {
     return {
-      customEmojiPath: config.nertiviaCDN + "emojis/",
+      customEmojiPath: config.nertiviaCDN + "/emojis/",
       index: 0
     };
   },

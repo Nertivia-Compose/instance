@@ -103,7 +103,7 @@ export default {
       return notifications.count;
     },
     userAvatar() {
-      return config.nertiviaCDN + this.recipient.avatar;
+      return `${config.nertiviaCDN}/` + this.recipient.avatar;
     },
     customStatus() {
       return this.$store.getters["members/customStatusArr"][

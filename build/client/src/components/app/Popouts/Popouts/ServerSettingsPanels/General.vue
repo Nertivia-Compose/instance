@@ -86,7 +86,7 @@ export default {
   components: { DropDown, ProfilePicture, ErrorsListTemplate, CustomInput },
   data() {
     return {
-      imageDomain: config.nertiviaCDN,
+      imageDomain: `${config.nertiviaCDN}/`,
       requestSent: false,
       changed: false,
       errors: null,

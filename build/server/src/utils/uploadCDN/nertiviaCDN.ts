@@ -5,7 +5,7 @@ export function uploadFile(BufferOrStream: any, userid: string, fileid: string, 
   return new Promise((resolve, reject) => {
 
     const options: request.Options = {
-      url: `${process.env.VUE_APP_CDN_DOMAIN}${process.env.VUE_APP_IMAGE_UPLOAD_FILE}`,
+      url: `${process.env.VUE_APP_CDN_DOMAIN}/${process.env.VUE_APP_IMAGE_UPLOAD_FILE}`,
       formData: {
         secret: config.fileCDNSecret,
         userid: userid || "",
@@ -29,7 +29,7 @@ export function uploadFile(BufferOrStream: any, userid: string, fileid: string, 
 export function deletePath(path: string) {
   return new Promise((resolve, reject) => {
     const options: request.Options = {
-      url: `${process.env.VUE_APP_CDN_DOMAIN}${process.env.VUE_APP_IMAGE_DELETE_FILE}`,
+      url: `${process.env.VUE_APP_CDN_DOMAIN}/${process.env.VUE_APP_IMAGE_DELETE_FILE}`,
       json: {
         secret: config.fileCDNSecret,
         removePath: path

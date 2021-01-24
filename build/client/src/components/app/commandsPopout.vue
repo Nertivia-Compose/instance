@@ -31,7 +31,7 @@ export default {
   props: ["list"],
   data() {
     return {
-      avatarPath: config.nertiviaCDN,
+      avatarPath: `${config.nertiviaCDN}/`,
       index: 0
     };
   },

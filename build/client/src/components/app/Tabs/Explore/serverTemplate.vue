@@ -71,7 +71,7 @@ export default {
   data() {
     return {
       joinClicked: false,
-      nertiviaCDN: config.nertiviaCDN,
+      nertiviaCDN: `${config.nertiviaCDN}/`,
 
       hover: false
     };

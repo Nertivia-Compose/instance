@@ -26,12 +26,14 @@ services:
     env_file: .env
     networks:
       - shared
-  cdn:
-    image: nertivia/cdn
+  caddy:
+    image: caddy:alpine
     hostname: cdn.localtest.me
     env_file: .env
     volumes:
-      - "./cdn:/cdn"
+      - "./cdn/ssl_certs:/ssl_certs"
+      - "./cdn/public_html:/public_html"
+      - "./cdn/Caddyfile:/etc/caddy/Caddyfile"
     ports:
       - "80:80"
       - "443:443"
@@ -40,16 +42,16 @@ services:
   php:
     image: php:fpm-alpine
     volumes:
-      - "./cdn:/cdn"
+      - "./cdn/public_html:/public_html"
     env_file: .env
     networks:
       - shared
   image-server:
     image: node:lts-alpine
-    working_dir: /cdn/node
+    working_dir: /public_html/node
     command: sh -c "npm i && node app.js"
     volumes:
-      - "./cdn:/cdn"
+      - "./cdn/public_html:/public_html"
     ports:
       - "${VUE_APP_CDN_PORT}:${VUE_APP_CDN_PORT}"
     env_file: .env
@@ -57,6 +59,5 @@ services:
       - shared
 volumes:
   mongodata:
-  cdn:
 networks:
   shared:

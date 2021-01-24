@@ -13,7 +13,7 @@ const config: Config = {
     captchaKey: `${process.env.VUE_APP_SERVER_CAPTCHA_KEY}`,
     devMode: true,
     domain: `${process.env.VUE_APP_CLIENT_DOMAIN}`,
-    allowedOrigins: [ `${process.env.VUE_APP_CLIENT_DOMAIN}:${process.env.VUE_APP_CLIENT_PORT}`, `${process.env.VUE_APP_SERVER_DOMAIN}:${process.env.VUE_APP_SERVER_PORT}`, `${process.env.VUE_APP_CDN_DOMAIN}:${process.env.VUE_APP_CDN_PORT}` ],
+    allowedOrigins: [ `${process.env.VUE_APP_CLIENT_DOMAIN}`, `${process.env.VUE_APP_SERVER_DOMAIN}:`, `${process.env.VUE_APP_CDN_DOMAIN}` ],
     googleDrive: {
         client_id: `${process.env.VUE_APP_GDRIVE_CLIENT_ID}`,
         client_secret: `${process.env.VUE_APP_GDRIVE_CLIENT_SECERT}`,

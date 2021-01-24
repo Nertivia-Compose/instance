@@ -44,7 +44,7 @@ export default {
   props: ["invite"],
   data() {
     return {
-      avatarDomain: config.nertiviaCDN,
+      avatarDomain: `${config.nertiviaCDN}/`,
       inviteDetail: undefined
     };
   },

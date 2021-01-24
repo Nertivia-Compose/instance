@@ -48,7 +48,7 @@ export default {
   },
   data() {
     return {
-      bannerDomain: config.nertiviaCDN,
+      bannerDomain: `${config.nertiviaCDN}/`,
       openedServer: null,
       bannerHover: false
     };
