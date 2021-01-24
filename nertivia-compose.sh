@@ -23,10 +23,6 @@ build() {
  echo "Building nertivia/client"
  docker build -t nertivia/client build/client
 
- # Build nertivia/cdn
- echo "Building nertivia/cdn"
- docker build -t nertivia/cdn build/cdn
-
  # Start all containers
  start
 }
@@ -39,10 +35,6 @@ update() {
  # Update client
  echo "Updating client..."
  docker-compose pull client
-
- # Update cdn
- echo "Updating cdn..."
- docker-compose pull cdn
 }
 
 ups() {
