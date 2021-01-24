@@ -1,3 +1,5 @@
+# WARNING: SSL doesn't work with cdn yet and i don't know how to fix that :/
+
 {$VUE_APP_CLIENT_DOMAIN} {
   #  tls /ssl_certs/localtest.me+1.pem /ssl_certs/localtest.me+1-key.pem
     reverse_proxy client:{$VUE_APP_CLIENT_PORT}
