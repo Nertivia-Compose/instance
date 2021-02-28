@@ -23,7 +23,7 @@ build() {
  echo "Building nertivia/client"
  docker build -t nertivia/client build/client
 
- # Start all containers
+ # Start the instance
  start
 }
 
@@ -35,14 +35,6 @@ update() {
  # Update client
  echo "Updating client..."
  docker-compose pull client
-}
-
-ups() {
-  # Update the instance
-  update
-
- # Start the instance
- start
 }
 
 if [ "$1" == "" ]; then
@@ -66,6 +58,7 @@ if [ "$1" == "update" ]; then
 fi
 
 if [ "$1" == "ups" ]; then
-  ups
+  update
+  start
   exit
 fi
