@@ -105,15 +105,13 @@ function getOGTags(url: string) {
       const parseHTML = cheerio.load(html);
       addIfExists(embed, "title", parseHTML('meta[property="og:title"]').attr('content'))
       addIfExists(embed, "type", parseHTML('meta[property="og:type"]').attr('content'))
-      addIfExists(embed, "url", parseHTML('meta[property="og:url"]').attr('content'))
+      // addIfExists(embed, "url", parseHTML('meta[property="og:url"]').attr('content'))
       addIfExists(embed, "image", parseHTML('meta[property="og:image"]').attr('content'))
       addIfExists(embed, "site_name", parseHTML('meta[property="og:site_name"]').attr('content'))
       addIfExists(embed, "description", parseHTML('meta[property="og:description"]').attr('content'))
       const keys = Object.keys(embed);
       if (!keys.length || keys.length === 1) return resolve({ok: false})
-      if (!embed.url){
-        embed.url = url;
-      }
+      embed.url = url;
       return resolve({ok: true, result: embed});
     } catch {
       return resolve({ok: false})
