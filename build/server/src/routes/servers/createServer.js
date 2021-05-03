@@ -15,9 +15,9 @@ const flake = require('../../utils/genFlakeId').default;
 
 module.exports = async (req, res, next) => {
   const { name } = req.body;
-  const user_id = req.user._id;
+  const userDocID = req.user._id;
   // A user can only create 10 servers.
-  const checkLimitExceeded = await Servers.find({ creator: user_id });
+  const checkLimitExceeded = await Servers.find({ creator: userDocID });
 
   if (checkLimitExceeded.length >= 10)
     return res.status(403).json({
@@ -28,7 +28,7 @@ module.exports = async (req, res, next) => {
   const serverID = flake.gen();
   const createServer = await Servers.create({
     name: name.trim(),
-    creator: user_id,
+    creator: userDocID,
     default_channel_id: channelID,
     server_id: serverID,
   });
@@ -44,13 +44,13 @@ module.exports = async (req, res, next) => {
   });
 
   const addServerUser = await User.updateOne(
-    { _id: user_id },
+    { _id: userDocID },
     { $push: { servers: createServer._id } }
   );
   const addServerMember = await ServerMembers.create({
     server: createServer._id,
     server_id: createServer.server_id,
-    member: user_id,
+    member: userDocID,
     type: "OWNER"
   });
 
@@ -86,11 +86,11 @@ module.exports = async (req, res, next) => {
 
 
 
-  createServerObj.creator = { uniqueID: req.user.uniqueID };
+  createServerObj.creator = { id: req.user.id };
   createServerObj.__v = undefined;
   createServerObj._id = undefined;
   res.json(createServerObj);
-  AddFCMUserToServer(createServer.server_id, req.user.uniqueID);
+  AddFCMUserToServer(createServer.server_id, req.user.id);
   // send owns status to every connected device
   createServerObj.channels = [createChannel];
   const serverMember = addServerMember.toObject();
@@ -98,19 +98,22 @@ module.exports = async (req, res, next) => {
     username: req.user.username,
     tag: req.user.tag,
     avatar: req.user.avatar,
-    uniqueID: req.user.uniqueID
+    id: req.user.id
   };
   serverMember.server_id = createServer.server_id;
 
-  io.in(req.user.uniqueID).emit("server:joined", createServerObj);
-  io.in(req.user.uniqueID).emit("server:create_role", roleData);
-  io.in(req.user.uniqueID).emit("server:member_add", {
+  io.in(req.user.id).emit("server:joined", createServerObj);
+  io.in(req.user.id).emit("server:create_role", roleData);
+  io.in(req.user.id).emit("server:member_add", {
     serverMember: serverMember
   });
   // join room
-  const room = io.sockets.adapter.rooms[req.user.uniqueID];
-  if (room)
-    for (let clientId in room.sockets || []) {
-      io.sockets.connected[clientId].join("server:" + createServer.server_id);
+
+  io.in(req.user.id).clients((err, clients) => {
+    for (let i = 0; i < clients.length; i++) {
+      const id = clients[i];
+      io.of('/').adapter.remoteJoin(id, "server:" + createServer.server_id);
     }
+  });
+
 };

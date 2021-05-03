@@ -1,17 +1,12 @@
-# WARNING: SSL doesn't work with cdn yet and i don't know how to fix that :/
-
-{$VUE_APP_CLIENT_DOMAIN} {
-   # tls /ssl_certs/localtest.me+1.pem /ssl_certs/localtest.me+1-key.pem
-    reverse_proxy client:{$VUE_APP_CLIENT_PORT}
+{$CADDYFILE_CLIENT_URL} {
+    reverse_proxy client:{$CLIENT_PORT}
 }
 
-{$VUE_APP_SERVER_DOMAIN} {
-   # tls /ssl_certs/localtest.me+1.pem /ssl_certs/localtest.me+1-key.pem
-    reverse_proxy server:{$VUE_APP_SERVER_PORT}
+{$CADDYFILE_SERVER_URL} {
+    reverse_proxy server:{$SERVER_PORT}
 }
 
-{$VUE_APP_CDN_DOMAIN} {
-  # tls /ssl_certs/localtest.me+1.pem /ssl_certs/localtest.me+1-key.pem
+{$CADDYFILE_CDN_URL} {
     root * /public_html
     encode gzip
 
@@ -26,5 +21,5 @@
         file_server
     }
 
-    reverse_proxy image-server:{$VUE_APP_CDN_PORT}
+    reverse_proxy image-server:{$CDN_PORT}
 }

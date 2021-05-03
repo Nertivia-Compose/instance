@@ -1,0 +1,313 @@
+{
+  "settings": {
+    "startup-options": {
+      "open-on-startup": "Nertivia beim Systemstart ausführen",
+      "notice": "Um diese Einstellungen zu ändern, müssen Sie die Nertivia Desktop-App herunterladen.",
+      "title": "Startoptionen für die Desktop-App"
+    },
+    "account": {
+      "change-password": "Passwort ändern",
+      "link-google-drive": "Google Drive verknüpfen",
+      "more-profile": "Mehr Profil",
+      "more-profile-notice": "Diese Informationen sind öffentlich",
+      "title": "Bearbeiten Sie Ihr Profil",
+      "relink-google-drive": "Google Drive erneut verknüpfen"
+    },
+    "delete-account": {
+      "delete-account-button": "Mein Konto löschen",
+      "delete-bots": "Alle Bots löschen",
+      "delete-leave-server": "Alle Server verlassen/löschen",
+      "messages-sent": "Ihre Nachrichten in öffentlichen Servern",
+      "notice": "Sie sind dabei, Ihr Konto zu löschen",
+      "requirements": "Vorraussetzungen",
+      "what-gets-deleted": "Was wird gelöscht",
+      "what-wont-delete": "Was wird nicht gelöscht"
+    },
+    "language": {
+      "details": "Tragen Sie bei, indem Sie eine PR in der GitHub-Repository einreichen.",
+      "translators": "Übersetzer"
+    },
+    "manage-bots": {
+      "add-command-button": "Befehl hinzufügen",
+      "command-notice": "Fügen Sie Bot-Befehle hinzu, um Benutzer einfach darüber zu informieren, welche Befehle für Ihren Bot vorhanden sind",
+      "copy-invite-url": "Einladung kopieren",
+      "copy-token": "Token kopieren",
+      "create-bot-button": "Bot erstellen",
+      "create-invite-link": "Einladung erstellen",
+      "delete-bot": "Bot löschen",
+      "details": "Erstellen Sie Bot-Benutzer, mit denen Sie mithilfe unserer API Ihre eigenen Bots erstellen können.",
+      "edit-bot": "Bot bearbeiten",
+      "edit-commands": "Befehle bearbeiten",
+      "manage-token": "Token verwalten",
+      "reset-token": "Token zurücksetzen",
+      "show-token": "Token anzeigen"
+    },
+    "manage-emojis": {
+      "add-emojis-button": "Emojis hinzufügen",
+      "details": "Laden Sie kostenlos Ihre eigenen hübschen Emojis hoch! Emojis dürfen nicht größer als 3 MB sein.",
+      "supported-types": "Unterstützte Datei-Typen sind: png, jpg, gif"
+    },
+    "notification": {
+      "notification-sound": "Benachrichtigungston",
+      "notification-sound-details": "Macht ein cooles Geräusch, um Ihre Aufmerksamkeit zu erregen",
+      "push-notification": "Push-Benachrichtigung",
+      "push-notification-details": "Erhalten Sie Push-Benachrichtigungen, auch wenn die App geschlossen ist.",
+      "title": "Ändern Sie Ihre Benachrichtigungseinstellungen."
+    },
+    "program-activity": {
+      "details": "Teilen Sie Programme oder Spiele, die Sie ausführen, indem Sie unten Apps hinzufügen. Dies ersetzt Ihren benutzerdefinierten Status beim Öffnen eines Programms und wird beim Schließen des Programms zurückgesetzt.",
+      "notice": "Um die Programmaktivitätsfunktion nutzen zu können, müssen Sie die Nertivia Desktop-App herunterladen."
+    },
+    "tab-names": {
+      "account": "Konto",
+      "changelog": "Changelog",
+      "delete-account": "Konto löschen",
+      "interface": "Benutzeröberfläche",
+      "language": "Sprache",
+      "manage-bots": "Bots verwalten",
+      "manage-emojis": "Emojis Verwalten",
+      "notification": "Benachrichtigungen",
+      "program-activity": "Programmaktivität",
+      "startup-options": "Startoptionen",
+      "wip-features": "Unfertige Features"
+    },
+    "interface": {
+      "colors": "Farben",
+      "description": "Ändern Sie das Erscheinungsbild von Nertivia.",
+      "amoled-dark": "AMOLED Dunkel",
+      "halloween-2020": "Halloween 2020",
+      "predefined-themes": "Vordefinierte Farbthemen",
+      "default-theme": "Standardfarben",
+      "color-scheme": "Farbschema",
+      "custom-css": "Benutzerdefiniertes CSS"
+    },
+    "wip-features": {
+      "title": "Aktivieren Sie unfertige oder experimentelle Funktionen.",
+      "none-available": "Derzeit sind keine unfertigen Funktionen verfügbar."
+    }
+  },
+  "add-friend-popout": {
+    "adding": "Füge hinzu...",
+    "notice": "Fügen Sie einen Freund hinzu, indem Sie dessen Benutzernamen und Tag eingeben."
+  },
+  "add-server-popout": {
+    "create-server-notice": "Erstellen Sie Ihren eigenen Server. Benennen Sie zunächst Ihren Server.",
+    "join-server-notice": "Treten Sie einem Server bei, indem Sie einen Einladungscode eingeben.",
+    "tabs": {
+      "create": "Erstellen",
+      "join": "Beitreten"
+    },
+    "title": "Server hinzufügen"
+  },
+  "are-you-sure": "Sind Sie sicher?",
+  "back": "Zurück",
+  "copy-id-button": "ID kopieren",
+  "dashboard-tab": {
+    "notifications": "Benachrichtigungen",
+    "profile": "Profil",
+    "click-to-add-custom-status": "Eigenen Status setzen",
+    "caught-up": "Komplett Aufgeholt!",
+    "direct-messages": "Direktnachrichten",
+    "servers": "Server",
+    "dashboard": "Dashboard",
+    "explore": "Erkunden"
+  },
+  "dm-tab": {
+    "friends": "Freunde",
+    "add-friend": "Neuer Freund",
+    "recents": "Letzte",
+    "saved-notes": "Notizen"
+  },
+  "message-area": {
+    "attach-message": "Nachricht hinzufügen",
+    "no-message-perm": "Sie haben nicht die nötigen Rechte, um in diesem Kanal zu sprechen.",
+    "not-connected-server": "Nicht verbunden",
+    "type-message": "Geben Sie Ihre Nachricht ein",
+    "back-to-bottom": "Zurück nach unten",
+    "new-messages": "Neue Nachrichten"
+  },
+  "message-context": {
+    "edit": "Bearbeiten",
+    "quote": "Zitieren"
+  },
+  "save-changes": "Änderungen speichern",
+  "saving": "Speichere...",
+  "server-context": {
+    "mark-as-read": "Als gelesen markieren",
+    "server-settings": "Server Einstellungen",
+    "leave-server": "Server verlassen"
+  },
+  "server-settings": {
+    "permissions": {
+      "permissions": "Berechtigungen",
+      "admin": {
+        "info": "Aktiviert ALLE Berechtigungen",
+        "name": "Administrator"
+      },
+      "ban-user": {
+        "info": "Nutzer kicken und Wiederbetreten verhindern",
+        "name": "Bannen"
+      },
+      "kick-user": {
+        "info": "Einen Benutzer kicken",
+        "name": "Kicken"
+      },
+      "manage-channels": {
+        "info": "Kanäle bearbeiten oder löschen",
+        "name": "Kanäle verwalten"
+      },
+      "manage-roles": {
+        "info": "Rollen bearbeiten oder löschen",
+        "name": "Rollen verwalten"
+      },
+      "send-messages": {
+        "info": "Nachrichten an Serverkanäle senden",
+        "name": "Nachrichten senden"
+      }
+    },
+    "tab-names": {
+      "banned-users": "Gebannte Benutzer",
+      "delete-server": "Server löschen",
+      "general": "Allgemein",
+      "manage-channels": "Kanäle verwalten",
+      "manage-invites": "Einladungen verwalten",
+      "manage-notification": "Benachrichtigung verwalten",
+      "manage-roles": "Rollen verwalten",
+      "manage-users": "Benutzer verwalten",
+      "server-visibility": "Server-Sichtbarkeit"
+    },
+    "manage-roles": {
+      "bot-role": "Bot Rolle",
+      "default-role": "Standardrolle",
+      "manage-your-roles": "Verwalten Sie Ihre Rollen.",
+      "create-role": "Neue Rolle erstellen",
+      "delete-role": "Rolle löschen",
+      "hide-role": "Rolle ausblenden",
+      "deleting-role": "Lösche Rolle...",
+      "notice-bot": "Diese Rolle kann nicht gelöscht oder einem anderen Mitglied zugewiesen werden, da sie von einem Bot erstellt wurde. Entfernen Sie den Bot, um diese Rolle zu entfernen.",
+      "notice-default": "Diese Rolle kann nicht gelöscht oder ihre Zweisunge entfernt werden, da sie die Standardrolle ist, die auf jedes Mitglied angewendet wird.",
+      "pick-role-color": "Wählen Sie Rollenfarbe",
+      "role-name": "Rollenname",
+      "settings": "Einstellungen"
+    },
+    "general": {
+      "general-server-settings": "Allgemeine Servereinstellungen"
+    },
+    "manage-channels": {
+      "channel-name": "Kanal Name",
+      "delete-channel": "Kanal löschen",
+      "deleting-channel": "Lösche Kanal...",
+      "manage-your-channels": "Verwalten Sie Ihre Kanäle.",
+      "default-channel-notice": "Dies ist ein Standardkanal. Sie können den Standardkanal unter 'Allgemein' ändern. Standardkanäle können nicht gelöscht werden.",
+      "create-new-channel": "Neuen Kanal erstellen",
+      "rate-limit-seconds": "Rate Limit (Sekunden)",
+      "html-channel": "HTML-Kanal (WIP)",
+      "permission": {
+        "send-message": "Nachrichten Senden"
+      },
+      "text-channel": "Textkanal"
+    },
+    "banned-users": {
+      "notice": "Mitglieder von hier aus entbannen",
+      "unban": "Entbannen",
+      "unbanning": "Entbanne..."
+    },
+    "manage-invites": {
+      "create-invite": "Einladung erstellen",
+      "create-invites": "Einladungen erstellen",
+      "custom-invite": "Benutzerdefinierte Einladung",
+      "creator": "Ersteller",
+      "link": "Link",
+      "notice": "Nur Administratoren können alle Einladungen sehen.",
+      "save-custom-link": "Benutzerdefinierten Link speichern",
+      "uses": "Benutzt"
+    },
+    "manage-users": {
+      "search-user": "Benutzer suchen"
+    },
+    "delete-server": {
+      "deleting": "Lösche...",
+      "type-server-name-to-confirm": "Servernamen zur Bestätigung eingeben"
+    },
+    "notifications": {
+      "description": "Ändern Sie die Benachrichtigungseinstellungen.",
+      "disable-notifications": "Benachrichtigungen ausschalten",
+      "enable-notifications": "Benachrichtigungen einschalten",
+      "mute-sound": "Ton stummschalten",
+      "notice": "Diese Einstellungen gelten nur für Sie und wirken sich nicht auf andere aus."
+    }
+  },
+  "time": {
+    "today-at": "Heute um {0}",
+    "yesterday-at": "Gestern um {0}"
+  },
+  "typing-status": {
+    "is-typing": "{0} schreibt...",
+    "more-than-three": "{0} Leute schreiben...",
+    "three-are-typing": "{0}, {1} und {2} schreiben...",
+    "two-are-typing": "{0} und {1} schreiben..."
+  },
+  "user-context": {
+    "ban": "Bannen",
+    "copy-user-tag": "Benutzer:Tag kopieren",
+    "edit-roles": "Rollen bearbeiten",
+    "kick": "Kicken",
+    "view-profile": "Profil ansehen"
+  },
+  "channel-context": {
+    "mute-channel": "Kanal stumm schalten",
+    "unmute-channel": "Kanal nicht mehr stummschalten"
+  },
+  "upload-dialog": {
+    "compress": "Komprimieren",
+    "upload-to": "Hochladen auf"
+  },
+  "presence": {
+    "away": "Abwesend",
+    "busy": "Beschäftigt",
+    "offline": "Offline",
+    "online": "Online",
+    "looking-to-play": "Suche nach Spielen"
+  },
+  "right-drawer": {
+    "server-members": "Mitglieder ({0})",
+    "server-offline-members": "Offline ({0})"
+  },
+  "profile-popout": {
+    "accept-request": "Anfrage annehmen",
+    "add-friend": "Freund hinzufügen",
+    "badges": "Abzeichen",
+    "cancel-request": "Anfrage abbrechen",
+    "common-friends": "Gemeinsame Freunde",
+    "common-servers": "Gemeinsame Server",
+    "joined-at": "Beigetreten",
+    "remove-friend": "Freund entfernen",
+    "send-message": "Direktnachricht senden",
+    "suspended": "Suspendiert"
+  },
+  "connection": {
+    "authenticating": "Authentifiziere...",
+    "loading": "Lade...",
+    "ready": "Bereit!"
+  },
+  "navbar": {
+    "update": "Aktualisieren",
+    "update-available": "Update verfügbar"
+  },
+  "generic": {
+    "copy": "Kopieren",
+    "delete": "Löschen",
+    "copied": "Kopiert!",
+    "user": "Benutzer"
+  },
+  "messages": {
+    "joined": "ist dem Server beigetreten!",
+    "banned": "wurde gebannt",
+    "kicked": "wurde gekickt",
+    "left": "hat den Server verlassen"
+  },
+  "could-not-connect-to-server": "Es konnte keine Verbindung zum Server hergestellt werden.",
+  "chat-area": {
+    "rate-limit-mode": "Langsamer Modus"
+  }
+}

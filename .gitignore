@@ -2,6 +2,5 @@ compose-dev.sh
 .env
 cdn/public_html/node/package-lock.json
 cdn/public_html/node/node_modules/
-cdn/ssl_certs/
 cdn/public_html/files/
 cdn/public_html/emojis_dir/

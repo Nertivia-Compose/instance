@@ -3,11 +3,13 @@ const { matchedData } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const JWT = require('jsonwebtoken');
 const cropImage = require('../../utils/cropImage');
+import compressImage from '../../utils/compressImage';
+import tempSaveImage from '../../utils/tempSaveImage';
 import * as nertiviaCDN from '../../utils/uploadCDN/nertiviaCDN'
-import config from '../../config';
 const flakeId = new (require('flakeid'))();
 const emitToAll = require('../../socketController/emitToAll');
 const sio = require("socket.io");
+const fs = require("fs");
 
 
 module.exports = async (req, res, next) => {
@@ -39,14 +41,14 @@ module.exports = async (req, res, next) => {
     const userTagExists = await Users.exists({
       username: data.username || user.username,
       tag: data.tag || user.tag,
-      uniqueID: { $ne: user.uniqueID }
+      id: { $ne: user.id }
     });
 
     if (data.email) {
       data.email = data.email.toLowerCase()
       const userEmailExists = await Users.exists({
         email: data.email,
-        uniqueID: { $ne: user.uniqueID }
+        id: { $ne: user.id }
       });
       if (userEmailExists) {
         return res
@@ -100,10 +102,16 @@ module.exports = async (req, res, next) => {
   }
 
   if (data.avatar) {
-    const url = await uploadAvatar(data.avatar, req.user.uniqueID).catch(err => {res.status(403).json({message: err})});
+    const url = await uploadAvatar(data.avatar, req.user.id).catch(err => {res.status(403).json({message: err})});
     if (!url) return;
     delete data.avatar;
     data.avatar = url;
+  }
+  if (data.banner) {
+    const url = await uploadBanner(data.banner, req.user.id).catch(err => {res.status(403).json({message: err})});
+    if (!url) return;
+    delete data.banner;
+    data.banner= url;
   }
 
   try {
@@ -114,24 +122,24 @@ module.exports = async (req, res, next) => {
     delete resObj.password;
     const updateSession = Object.assign({}, req.session["user"], resObj, {passwordVersion: req.user.passwordVersion});
     req.session["user"] = updateSession;
-    resObj.uniqueID = user.uniqueID;
+    resObj.id = user.id;
     const io = req.io;
     if (updatePassword) {
-      res.json({...resObj, token: JWT.sign(`${user.uniqueID}-${req.user.passwordVersion}`, config.jwtSecret).split(".").splice(1).join(".")});
+      res.json({...resObj, token: JWT.sign(`${user.id}-${req.user.passwordVersion}`, process.env.JWT_SECRET).split(".").splice(1).join(".")});
 
       // logout other accounts
-      kickUser(io, user.uniqueID, socketID)
+      kickUser(io, user.id, socketID)
 
     } else {
       res.json(resObj);
     }
 
 
-    io.in(req.user.uniqueID).emit("update_member", resObj);
+    io.in(req.user.id).emit("update_member", resObj);
 
     // emit public data
     if (!data.avatar && !data.username) return;
-    const publicObj = {uniqueID: req.user.uniqueID}
+    const publicObj = {id: req.user.id}
     if (data.avatar) publicObj.avatar = data.avatar;
     if (data.username) publicObj.username = data.username;
     if (data.tag) publicObj.tag = data.tag;
@@ -143,8 +151,16 @@ module.exports = async (req, res, next) => {
   }
 };
 
+async function uploadAvatar(base64, user_id) {
+  return uploadImage(base64, user_id, 200, 'avatar')
+}
+async function uploadBanner(base64, user_id) {
+  return uploadImage(base64, user_id, 1900, 'banner')
+}
 
-async function uploadAvatar(base64, uniqueID) {
+
+
+async function uploadImage(base64, user_id, size, name) {
   return new Promise(async (resolve, reject) => {
     let buffer = Buffer.from(base64.split(',')[1], 'base64');
 
@@ -157,27 +173,43 @@ async function uploadAvatar(base64, uniqueID) {
     const mimeType = base64MimeType(base64);
     const type = base64.split(';')[0].split('/')[1];
     if (!checkMimeType(mimeType)) {
-      return reject("Invalid avatar.")
+      return reject("Invalid " + name)
 
     }
 
-    buffer = await cropImage(buffer, mimeType, 200);
+    let dirPath = "";
+
+    if (name === "banner") {
+      dirPath = (await tempSaveImage(`bnr.${type}`, buffer)).dirPath;
+      dirPath = await compressImage(`bnr.${type}`, dirPath).catch(err => {reject("Something went wrong while compressing image.") })
+      if (!dirPath) return;
+      buffer = fs.createReadStream(dirPath);
+    } else {
+      buffer = await cropImage(buffer, mimeType, size);
+    }
 
     if (!buffer) {
+      if (name === "banner") deleteFile(dirPath);
       return reject("Something went wrong while cropping image.")
     }
     const id = flakeId.gen();
 
 
-    const success = await nertiviaCDN.uploadFile(buffer, uniqueID, id, `avatar.${type}`)
+    const success = await nertiviaCDN.uploadFile(buffer, user_id, id, `${name}.${type}`)
       .catch(err => {reject(err)})
+    if (name === "banner") deleteFile(dirPath);
+
     if (!success) return;
-    resolve(`${uniqueID}/${id}/avatar.${type}`);
+    resolve(`${user_id}/${id}/${name}.${type}`);
   })
 }
 
 
-
+function deleteFile(path) {
+  fs.unlink(path, err => {
+    if (err) console.error(err)
+  });
+}
 function base64MimeType(encoded) {
   var result = null;
 
@@ -208,15 +240,13 @@ function checkMimeType(mimeType) {
  * @param {sio.Server} io
  */
 // also used in reset password.
-async function kickUser(io, uniqueID, socketID) {
-  const rooms = io.sockets.adapter.rooms[uniqueID];
-  if (!rooms || !rooms.sockets) return;
-
-  for (const clientId in rooms.sockets) {
-    const client = io.sockets.connected[clientId];
-    if (!client) continue;
-    if (client.id === socketID) continue;
-    client.emit("auth_err", "Password Changed.");
-    client.disconnect(true);
-  }
+async function kickUser(io, user_id, socketID) {
+  io.in(user_id).clients((err, clients) => {
+    for (let i = 0; i < clients.length; i++) {
+      const id = clients[i];
+      if (id === socketID) continue;
+      io.to(id).emit("auth_err", "Password Changed.");
+      io.of('/').adapter.remoteDisconnect(id, true) 
+    }
+  });
 }

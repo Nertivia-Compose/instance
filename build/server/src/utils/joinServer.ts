@@ -64,7 +64,7 @@ export default async function join(server: any, user: any, socketID: string | un
   }).lean();
 
   const createServerObj = Object.assign({}, server);
-  createServerObj.creator = { uniqueID: createServerObj.creator.uniqueID };
+  createServerObj.creator = { id: createServerObj.creator.id };
   createServerObj.__v = undefined;
   createServerObj._id = undefined;
 
@@ -80,12 +80,12 @@ export default async function join(server: any, user: any, socketID: string | un
       username: user.username,
       tag: user.tag,
       avatar: user.avatar,
-      uniqueID: user.uniqueID
+      id: user.id
     }
   };
   // get user presence
-  const presence = await redis.getPresence(serverMember.member.uniqueID);
-  const customStatus = await redis.getCustomStatus(serverMember.member.uniqueID);
+  const presence = await redis.getPresence(serverMember.member.id);
+  const customStatus = await redis.getCustomStatus(serverMember.member.id);
   io.in("server:" + server.server_id).emit("server:member_add", {
     serverMember,
     custom_status: customStatus.result[1],
@@ -95,20 +95,17 @@ export default async function join(server: any, user: any, socketID: string | un
   // send owns status to every connected device
   createServerObj.channels = serverChannels;
 
-  io.in(user.uniqueID).emit(
-    "server:joined",
-    socketID ? {...createServerObj, socketID } : createServerObj
-  );
   // join room
-  const room = io.sockets.adapter.rooms[user.uniqueID];
-  if (room)
-    for (let clientId in room.sockets || []) {
-      if (io.sockets.connected[clientId]) {
-        io.sockets.connected[clientId].join(
-          "server:" + createServerObj.server_id
-        );
-      }
+  io.in(user.id).clients((err: any, clients: string[]) => {
+    for (let i = 0; i < clients.length; i++) {
+      const id = clients[i];
+      io.to(id).emit(
+        "server:joined",
+        socketID ? {...createServerObj, socketID } : createServerObj
+      );
+      (io.of('/').adapter as any).remoteJoin(id, "server:" + createServerObj.server_id)
     }
+  });
 
   // send join message
 
@@ -121,7 +118,7 @@ export default async function join(server: any, user: any, socketID: string | un
 
   let messageCreated = await messageCreate.save();
   user = {
-    uniqueID: user.uniqueID,
+    id: user.id,
     username: user.username,
     tag: user.tag,
     avatar: user.avatar,
@@ -131,16 +128,9 @@ export default async function join(server: any, user: any, socketID: string | un
   messageCreated.creator = user;
 
   // emit message
-  const serverRooms =
-    io.sockets.adapter.rooms["server:" + createServerObj.server_id];
-  if (serverRooms) {
-    for (let clientId in serverRooms.sockets || []) {
-      io.to(clientId).emit("receiveMessage", {
-        message: messageCreated
-      });
-    }
-  }
-
+  io.in("server:" + createServerObj.server_id).emit("receiveMessage", {
+    message: messageCreated
+  });
 
   await Channels.updateOne({ channelID: server.default_channel_id }, { $set: {
     lastMessaged: Date.now()
@@ -150,7 +140,7 @@ export default async function join(server: any, user: any, socketID: string | un
   defaultChannel.server = server;
 
 
-  await AddFCMUserToServer(server.server_id, user.uniqueID)
+  await AddFCMUserToServer(server.server_id, user.id)
 
   sendServerPush({
     channel: defaultChannel,
@@ -170,17 +160,17 @@ export default async function join(server: any, user: any, socketID: string | un
     { _id: 0 }
   ).select("name id color permissions server_id deletable order default hideRole");
 
-  io.to(user.uniqueID).emit("server:roles", {
+  io.to(user.id).emit("server:roles", {
     server_id: server.server_id,
     roles: serverRoles
   });
 
   // send members list
   let serverMembers = await ServerMembers.find({ server: server._id })
-    .populate("member", "username tag avatar uniqueID bot")
+    .populate("member", "username tag avatar id bot")
     .lean();
 
-  const  {programActivityArr, memberStatusArr, customStatusArr} = await getUserDetails(serverMembers.map((sm: any) => sm.member.uniqueID))   
+  const  {programActivityArr, memberStatusArr, customStatusArr} = await getUserDetails(serverMembers.map((sm: any) => sm.member.id))   
 
   serverMembers = serverMembers.map((sm: any) => {
     delete sm.server;
@@ -189,7 +179,7 @@ export default async function join(server: any, user: any, socketID: string | un
     sm.server_id = server.server_id;
     return sm;
   });
-  io.to(user.uniqueID).emit("server:members", {
+  io.to(user.id).emit("server:members", {
     serverMembers,
     memberPresences: memberStatusArr,
     memberCustomStatusArr: customStatusArr,

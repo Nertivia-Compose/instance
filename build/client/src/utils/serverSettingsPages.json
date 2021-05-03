@@ -1,0 +1,63 @@
+{
+  "general":{
+    "name": "General",
+    "id": "general",
+    "icon": "info",
+    "admin": true,
+    "component": "General"
+  },
+  "manage-channels":{
+    "name": "Manage Channels",
+    "id": "manage-channels",
+    "icon": "storage",
+    "admin": true,
+    "component": "ManageChannels"
+  },
+  "manage-roles":{
+    "name": "Manage Roles",
+    "id": "manage-roles",
+    "icon": "leaderboard",
+    "admin": true,
+    "component": "ManageRoles"
+  },
+  "manage-invites": {
+    "name": "Manage Invites",
+    "id": "manage-invites",
+    "icon": "settings",
+    "component": "ManageInvites"
+  },
+  "server-visibility": {
+    "name": "Server Visibility",
+    "id": "server-visibility",
+    "icon": "visibility",
+    "owner": true,
+    "component": "ServerVisibility"
+  },
+  "manage-notification": {
+    "name": "Manage Notification",
+    "id": "manage-notification",
+    "icon": "notifications",
+    "component": "ManageNotification"
+  },
+  "banned-users": {
+    "name": "Banned Users",
+    "id": "banned-users",
+    "icon": " block",
+    "admin": true,
+    "component": "BannedUsers"
+  },
+  "manage-users": {
+    "name": "Manage Users",
+    "id": "manage-users",
+    "icon": "contacts",
+    "admin": true,
+    "component": "ManageUsers"
+  },
+  "delete-server": {
+    "name": "Delete Server",
+    "id": "delete-server",
+    "icon": "delete",
+    "owner": true,
+    "component": "DeleteServer"
+  }
+}

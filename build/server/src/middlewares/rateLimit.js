@@ -4,11 +4,18 @@ module.exports = function (options) {
     const {name, expire, requestsLimit, useIP, nextIfInvalid} = options;
     let key = "";
     if (!useIP) {
-      key = `${req.user.uniqueID}-${name}`
+      key = `${req.user.id}-${name}`
     } else {
       key = `${req.userIP.replace(/:/g, '=')}-${name}`
     }
     const [count, ttl] = await redis.rateLimitIncr(key, expire);
+    const ttlToseconds = ttl / 1000
+    if (ttlToseconds > expire) {
+      // reset if expire time changes (slow down mode)
+      redis.rateLimitSetExpire(key, expire, -1);
+      next();
+      return;
+    }
     if (count > requestsLimit) {
       if (nextIfInvalid) {
         req.rateLimited = true;

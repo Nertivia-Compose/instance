@@ -1,0 +1,400 @@
+[
+	{
+		"version": "1.30.2-stable",
+		"date": "03 May 2021",
+		"title": "Stable",
+		"new": [
+			"Added download app button"
+		]
+	},
+	{
+		"version": "1.30.1-beta",
+		"date": "29 April 2021",
+		"title": "Donate Links & Home Page Changes",
+		"new": [
+			"Added Ko-fi donation link to settings <3",
+			"Added 'View Changes' button to the home page.",
+			"Changed Home Page design slightly"
+		]
+	},
+	{
+		"version": "1.30.0-beta",
+		"date": "27 April 2021",
+		"title": "Bug fixes, Small Features",
+		"new": [
+			"Reset single color in the interface settings.",
+			"Added typing status background color to interface settings"
+		],
+		"fixes": "Emoji picker not toggling."
+	},
+	{
+		"version": "1.29.0-beta",
+		"date": "26 April 2021",
+		"title": "CSS Themes",
+		"new": "You can now create CSS Themes through the interface setting. Ability to share themes is coming soon!"
+	},
+	{
+		"version": "1.28.2-beta",
+		"date": "26 April 2021",
+		"title": "Bug Fix",
+		"fixes": "Fixed a bug where when switching servers, last selected server channel would not save."
+	},
+	{
+		"version": "1.28.1-beta",
+		"date": "23 April 2021",
+		"title": "WIP Features",
+		"new": "WIP Features can now be enabled through the settings when they are available."
+	},
+	{
+		"version": "1.28.0-beta",
+		"date": "22 April 2021",
+		"title": "Markup Spoilers (by bree)",
+		"new": "Added spoilers to the markup",
+		"body": "Spoilers can be used like <code>||shh!||</code>"
+	},
+	{
+		"version": "1.27.1-beta",
+		"date": "18 April 2021",
+		"title": "Bug Fixes",
+		"fixes": "Profile Card would not show in mobile mode.",
+		"changes": "As you can access the settings through the profile card, settings icon is now removed."
+	},
+	{
+		"version": "1.27.0-beta",
+		"date": "15 April 2021",
+		"title": "Language Support",
+		"new": "Language support has been added to this app.",
+		"body": "Help add more languages <a href='https://github.com/supertiger1234/nertivia-client-ts/tree/master/src/locales' target='_blank' rel='noopener noreferrer'>here</a>."
+	},
+	{
+		"version": "1.26.1-beta",
+		"date": "13 April 2021",
+		"title": "Small Visual Changes",
+		"changes": ["Changed button design.", "Slightly changed the input area background color"]
+	},
+	{
+		"version": "1.26.0-beta",
+		"date": "12 April 2021",
+		"title": "Profile Banners",
+		"new": "You can now add a banner to your profile page."
+	},
+	{
+		"version": "1.25.3-beta",
+		"date": "12 April 2021",
+		"title": "Bug fixes",
+		"changes": "Changed the ugly looking 'uniqueID' to 'user_id' and 'id'."
+	},
+	{
+		"version": "1.25.2-beta",
+		"date": "09 April 2021",
+		"title": "Bug fixes",
+		"fixes": "When joining a server, everyone displayed as offline."
+	},
+	{
+		"version": "1.25.1-beta",
+		"date": "05 April 2021",
+		"title": "Added shortcuts",
+		"new": [
+			"ALT + UP/DOWN: navigate between server channels",
+			"ALT + CTRL + UP/DOWN: navigate between servers"
+		]
+	},
+	{
+		"version": "1.25.0-beta",
+		"date": "05 April 2021",
+		"title": "Server Visibility Option",
+		"new": "You can now set your server visibility through server settings."
+	},
+	{
+		"version": "1.24.0-beta",
+		"date": "04 April 2021",
+		"title": "Drawers Upgrade",
+		"new": "You can now hide the members drawer in desktop mode."
+	},
+	{
+		"version": "1.23.2-beta",
+		"date": "03 April 2021",
+		"title": "Explore Filter Options",
+		"new": "Added filter options to explore server tab."
+	},
+	{
+		"version": "1.22.2-beta",
+		"date": "02 April 2021",
+		"title": "Markup Fixes (By bree)",
+		"fixes": [
+			"Links no longer match unwanted or uneeded characters. Goodbye (https://example.com/) including the )",
+			"Complex emojis and emoji sequences are now supported",
+			"Custom expressions now properly add to the text count. No more large emojis when mentioning someone!"
+		]
+	},
+	{
+		"version": "1.22.1-beta",
+		"date": "02 April 2021",
+		"title": "Bug Fix",
+		"fixes": "Game status would not be emited after 3 minutes."
+	},
+	{
+		"version": "1.22.0-beta",
+		"date": "01 April 2021",
+		"title": "Program Activity",
+		"new": "Added program activity page in settings.",
+		"fixes": "Fixed a bug related to custom status and status",
+		"changes": "Gif profile pictures and custom emojis now require you to pay a subscription that costs $99.99/month."
+	},
+	{
+		"version": "1.21.0-beta",
+		"date": "31 March 2021",
+		"title": "Added Badges",
+		"new": "Added Badges. This is not fully completed but functional for now."
+	},
+	{
+		"version": "1.20.0-beta",
+		"date": "29 March 2021",
+		"title": "Profile Details",
+		"new": "Add profile details such as your name, gender, age and more inside the accounts page in settings."
+	},
+	{
+		"version": "1.19.3-beta",
+		"date": "28 March 2021",
+		"title": "Change to Rate Limit",
+		"changes": "Admins and owners are now immune from rate limited channels."
+	},
+	{
+		"version": "1.19.2-beta",
+		"date": "28 March 2021",
+		"title": "Bug Fix & Added Notices",
+		"fixes": "Servers didn't get detected in the Delete Account page.",
+		"new": "Added a notice in the explore server page."
+	},
+	{
+		"version": "1.19.1-beta",
+		"date": "27 March 2021",
+		"title": "Last Selected Server Channel",
+		"changes": [
+			"Last Selected Server Channels will now be remembered.",
+			"Clicking on common friends now replaces the currnet profile popup instead of opening a DM."
+		]
+	},
+	{
+		"version": "1.19.0-beta",
+		"date": "26 March 2021",
+		"title": "Rate Limit Mode!",
+		"new": "You can now set a rate limit on each channels through channel settings."
+	},
+	{
+		"version": "1.18.0-beta",
+		"date": "26 March 2021",
+		"title": "Link markup",
+		"new": [
+			"Added links to the markup thanks to bree!"
+		]
+	},
+	{
+		"version": "1.17.0-beta",
+		"date": "26 March 2021",
+		"title": "Delete Account (DONT)",
+		"new": [
+			"New delete account option in settings is now available."
+		]
+	},
+	{
+		"version": "1.16.2-beta",
+		"date": "26 March 2021",
+		"title": "Bug Fixes",
+		"new": [
+			"You can now easily see which role is default and which role is created by a bot.",
+			"Notice message now displays for the deafult and bot roles on the edit role page."
+		]
+	},
+	{
+		"version": "1.16.1-beta",
+		"date": "25 March 2021",
+		"title": "Bug Fixes",
+		"fixes": [
+			"Added minimum bubble height",
+			"Close confirm link popout after clicking on 'visit'",
+			"Show confirm popout when clicking on a named link."
+		]
+	},
+	{
+		"version": "1.16.0-beta",
+		"date": "24 March 2021",
+		"title": "More Markup!",
+		"new": "Added more markup thanks to bree!"
+	},
+	{
+		"version": "1.15.5-beta",
+		"date": "23 March 2021",
+		"title": "Role Bug Fixes & Server Perfomance Improvements!",
+		"fixes": "Server owner could not modify role permissions.",
+		"changes": "Server is now running in 4 clusters. This means that the server will be more responsive."
+	},
+	{
+		"version": "1.15.4-beta",
+		"date": "21 March 2021",
+		"title": "More Drawer Improvements!",
+		"changes": "You can now swipe to open the drawers (mobile only)"
+	},
+	{
+		"version": "1.15.3-beta",
+		"date": "20 March 2021",
+		"title": "Faster Drawers",
+		"changes": [
+			"Changed the code for drawers. They should open way quicker on a mobile device.",
+			"Do not automatically show keyboard on mobile."
+		]
+	},
+	{
+		"version": "1.15.2-beta",
+		"date": "20 March 2021",
+		"title": "Fixed Overflow",
+		"fixes": "Fixed overflow for the custom status."
+	},
+	{
+		"version": "1.15.1-beta",
+		"date": "19 March 2021",
+		"title": "Role Priority",
+		"changes": "Roles now have a priority. low priority roles cannot modify the higher priority roles."
+	},
+	{
+		"version": "1.15.0-beta",
+		"date": "19 March 2021",
+		"title": "Verified Servers",
+		"new": "Servers that are verified now have a checkmark."
+	},
+	{
+		"version": "1.14.0-beta",
+		"date": "18 March 2021",
+		"title": "Block Users",
+		"changes": "Clicking on a friend in friends list or clicking on a setting option should now close the drawer on mobile.",
+		"new": "Open server context menu from the drawer header."
+	},
+	{
+		"version": "1.13.0-beta",
+		"date": "18 March 2021",
+		"title": "Block Users",
+		"new": "You can now block users from the profile popout. Blocking the users will prevent them from interacting to you."
+	},
+	{
+		"version": "1.12.0-beta",
+		"date": "18 March 2021",
+		"title": "Server Invite Page",
+		"new": "Added invites page.",
+		"fixes": "Fixed some bugs throughout the code."
+	},
+	{
+		"version": "1.11.1-beta",
+		"date": "17 March 2021",
+		"title": "Fixes And Changes",
+		"changes": "Invite links should now use MainAppURL",
+		"fixes": "You can now scroll through the server channels list."
+	},
+	{
+		"version": "1.11.0-beta",
+		"date": "17 March 2021",
+		"title": "Desktop App Badge",
+		"new": "Notifications will now show a red badge for the electron app."
+	},
+	{
+		"version": "1.10.0-beta",
+		"date": "16 March 2021",
+		"title": "Edit Bot Commands",
+		"new": "You can now edit bot commands in the manage bots page in settings."
+	},
+	{
+		"version": "1.9.0-beta",
+		"date": "15 March 2021",
+		"title": "Come Back! :(",
+		"new": [
+			"You can now unban members from a server through the server settings page.",
+			"Right clicking on a mentioned user should now display a context menu."
+		]
+	},
+	{
+		"version": "1.8.1-beta",
+		"date": "14 March 2021",
+		"title": "Fixed Bug",
+		"fixes": "Clicking on a user in manage users would take you to an incorrect user."
+	},
+	{
+		"version": "1.8.0-beta",
+		"date": "14 March 2021",
+		"title": "Common Servers & Friends",
+		"new": "You can now see common servers and common friends in the profile popout.",
+		"changes": [
+			"Changed version numbering to be semantic",
+			"Slightly changed the way how updates are checked and displayed."
+		]
+	},
+	{
+		"version": "1.7.0-beta",
+		"date": "13 March 2021",
+		"title": "Video Embed",
+		"new": "Uploaded MP4 videos and YouTube URL links now show an embed inside Nertivia."
+	},
+	{
+		"version": "1.6.0-beta",
+		"date": "13 March 2021",
+		"title": "Bots",
+		"new": "You can now create & invite bots.",
+		"fixes": "Fixed some minor bugs."
+	},
+	{
+		"version": "1.5.0-beta",
+		"date": "09 March 2021",
+		"title": "Close DM Channels",
+		"new": "You can now close DM channels"
+	},
+	{
+		"version": "1.4.0-beta",
+		"date": "08 March 2021",
+		"title": "Google Drive Link",
+		"new": "Added link with Google Drive popout",
+		"fixes": "Fixed some minor bugs."
+	},
+	{
+		"version": "1.3.0-beta",
+		"date": "05 March 2021",
+		"title": "Small Changes",
+		"new": "Added electron title bar WIP. You won't be able to see it yet though as the electron app is not released yet.",
+		"changes": "Removed border radius from left side header."
+	},
+	{
+		"version": "1.2.0-beta",
+		"date": "05 March 2021",
+		"title": "Delete Server",
+		"new": "You can now delete your server through server settings.",
+		"changes": "Made changes to the changelog header."
+	},
+	{
+		"version": "1.1.2-beta",
+		"date": "05 March 2021",
+		"title": "Create Server Bug Fix",
+		"fixes": "Creating a server would throw errors."
+	},
+	{
+		"version": "1.1.1-beta",
+		"date": "05 March 2021",
+		"title": "Small Changes",
+		"changes": "Popouts with buttons now use the custom button template."
+	},
+	{
+		"version": "1.1.0-beta",
+		"date": "05 March 2021",
+		"title": "Changelog",
+		"new": "Added a changelog GUI which will be shown automatically. You can also view the changelog through the settings page.",
+		"changes": "Changed border radius in some places."
+	},
+	{
+		"version": "1.0.0-beta",
+		"date": "04 March 2021",
+		"title": "Update Checker",
+		"new": [
+			"Added a changelog. Will hopefully make a GUI for it next.",
+			"Added an update checker. Nertivia will check for updates every hour when interacting."
+		],
+		"changes": [],
+		"fixes": [],
+		"body": ""
+	}
+]

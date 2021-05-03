@@ -1,0 +1,23 @@
+{
+  "save-changes": "Guarder cambios",
+  "saving": "Ahorro...",
+  "are-you-sure": "¿Estas seguro?",
+  "copy-id-button": "Copia ID",
+  "time": {
+    "today-at": "Hoy a {0}",
+    "yesterday-at": "Ayer a {0}"
+  },
+  "user-context": {
+    "view-profile": "Ve Perfil",
+    "edit-roles": "Editar Roles",
+    "kick": "Patada",
+    "ban": "Prohibicíon",
+    "copy-user-tag": "Copiar Usuario:Marbete"
+  },
+  "dm-tab": {
+    "friends": "Amigos",
+    "recents": "Recientes",
+    "saved-notes": "Salvado notas",
+    "add-friend": "Agregar Amigo"
+  }
+}

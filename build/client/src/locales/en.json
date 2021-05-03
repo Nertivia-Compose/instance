@@ -1,0 +1,313 @@
+{
+  "save-changes": "Save Changes",
+  "saving": "Saving...",
+  "back": "Back",
+  "are-you-sure": "Are you sure?",
+  "copy-id-button": "Copy ID",
+  "time": {
+    "today-at": "Today at {0}",
+    "yesterday-at": "Yesterday at {0}"
+  },
+  "message-area": {
+    "no-message-perm": "You don't have permission to talk in this channel.",
+    "not-connected-server": "Not Connected",
+    "attach-message": "Attach a message",
+    "type-message": "Type your message",
+    "back-to-bottom": "Back To Bottom",
+    "new-messages": "New Messages"
+  },
+  "upload-dialog": {
+    "compress": "Compress",
+    "upload-to": "Upload To"
+  },
+  "user-context": {
+    "view-profile": "View Profile",
+    "edit-roles": "Edit Roles",
+    "kick": "Kick",
+    "ban": "Ban",
+    "copy-user-tag": "Copy User:Tag"
+  },
+  "message-context": {
+    "quote": "Quote",
+    "edit": "Edit"
+  },
+  "server-context": {
+    "mark-as-read": "Mark As Read",
+    "server-settings": "Server Settings",
+    "leave-server": "Leave Server"
+  },
+  "channel-context": {
+    "mute-channel": "Mute Channel",
+    "unmute-channel": "Unmute Channel"
+  },
+  "settings": {
+    "tab-names": {
+      "account": "Account",
+      "notification": "Notifications",
+      "manage-emojis": "Manage Emojis",
+      "startup-options": "Startup Options",
+      "program-activity": "Program Activity",
+      "manage-bots": "Manage Bots",
+      "interface": "Interface",
+      "language": "Language",
+      "delete-account": "Delete Account",
+      "changelog": "Changelog",
+      "wip-features": "WIP Features"
+    },
+    "account": {
+      "title": "Edit Your Profile",
+      "change-password": "Change Password",
+      "relink-google-drive": "Re-link Google Drive",
+      "link-google-drive": "Link Google Drive",
+      "more-profile": "More Profile",
+      "more-profile-notice": "This information is seen by everyone."
+    },
+    "notification": {
+      "title": "Change your notification settings.",
+      "notification-sound": "Notification Sound",
+      "notification-sound-details": "Makes a cool sound to get your attention",
+      "push-notification": "Push Notification",
+      "push-notification-details": "Get push notifications even when the app is closed."
+    },
+    "manage-emojis": {
+      "details": "Upload your own pretty emojis for free! Emojis must be 3MB or less.",
+      "supported-types": "Supported file types are: png, jpg, gif",
+      "add-emojis-button": "Add Emojis"
+    },
+    "startup-options": {
+      "title": "Desktop App Startup Options",
+      "notice": "To modify these settings, you must download the Nertivia desktop app.",
+      "open-on-startup": "Open Nertivia On Startup"
+    },
+    "program-activity": {
+      "details": "Share programs or games you are running by adding apps below. This will replace your custom status when a program is opened and will revert back when the program is closed.",
+      "notice": "To use the program acitivty feature, you must download the Nertivia desktop app."
+    },
+    "manage-bots": {
+      "details": "Create bot users which will allow you to use our API to create your own fancy bots.",
+      "command-notice": "Add bot commands to easily let users know which commands exist for your bot",
+      "create-bot-button": "Create Bot",
+      "add-command-button": "Add Command",
+      "edit-bot": "Edit Bot",
+      "edit-commands": "Edit Commands",
+      "create-invite-link": "Create Invite Link",
+      "copy-invite-url": "Copy Invite URL",
+      "manage-token": "Manage Token",
+      "show-token": "Show Token",
+      "copy-token": "Copy Token",
+      "reset-token": "Reset Token",
+      "delete-bot": "Delete Bot"
+    },
+    "delete-account": {
+      "notice": "You are about to delete your account",
+      "what-gets-deleted": "What will get deleted",
+      "what-wont-delete": "What won't get deleted",
+      "messages-sent": "Your messages sent to public servers",
+      "requirements": "Requirements",
+      "delete-leave-server": "Leave/Delete all servers",
+      "delete-bots": "Delete all bots",
+      "delete-account-button": "Delete My Account"
+    },
+    "language": {
+      "details": "Reload may be required after changing language. Contribute by submitting a PR in the GitHub repo.",
+      "translators": "Translators"
+    },
+    "interface": {
+      "description": "Change the appearance of Nertivia.",
+      "colors": "Colors",
+      "default-theme": "Default Theme",
+      "amoled-dark": "AMOLED Dark",
+      "halloween-2020": "Halloween 2020",
+      "predefined-themes": "Pre-defined Themes",
+      "custom-css": "Custom CSS",
+      "color-scheme": "Color Scheme"
+    },
+    "wip-features": {
+      "title": "Enable unfinished or experimental features.",
+      "none-available": "No WIP Features available right now."
+    }
+  },
+  "server-settings": {
+    "permissions": {
+      "permissions": "Permissions",
+      "admin": {
+        "name": "Admin",
+        "info": "Enables ALL permissions"
+      },
+      "send-messages": {
+        "name": "Send Messages",
+        "info": "Send messages to server channels"
+      },
+      "manage-roles": {
+        "name": "Manage Roles",
+        "info": "Update or delete roles"
+      },
+      "manage-channels": {
+        "name": "Manage Channels",
+        "info": "Update or delete channels"
+      },
+      "kick-user": {
+        "name": "Kick",
+        "info": "Kick a user"
+      },
+      "ban-user": {
+        "name": "Ban",
+        "info": "Kick & restrict a user from joining"
+      }
+    },
+    "tab-names": {
+      "general": "General",
+      "manage-channels": "Manage Channels",
+      "manage-roles": "Manage Roles",
+      "manage-invites": "Manage Invites",
+      "server-visibility": "Server Visibility",
+      "manage-notification": "Manage Notification",
+      "banned-users": "Banned Users",
+      "manage-users": "Manage Users",
+      "delete-server": "Delete Server"
+    },
+    "manage-roles": {
+      "manage-your-roles": "Manage your roles.",
+      "default-role": "Default Role",
+      "bot-role": "Bot Role",
+      "create-role": "Create New Role",
+      "notice-bot": "This role cannot be deleted/assigned to another member as it was created by a bot. Remove the bot to remove this role.",
+      "notice-default": "This role cannot be deleted or be un-assigned as this is the default role that gets applied to every member.",
+      "pick-role-color": "Pick Role Color",
+      "role-name": "Role Name",
+      "settings": "Settings",
+      "delete-role": "Delete Role",
+      "deleting-role": "Deleting Role...",
+      "hide-role": "Hide Role"
+    },
+    "general": {
+      "general-server-settings": "General Server Settings"
+    },
+    "manage-channels": {
+      "manage-your-channels": "Manage your channels.",
+      "delete-channel": "Delete Channel",
+      "deleting-channel": "Deleting Channel...",
+      "channel-name": "Channel Name",
+      "default-channel-notice": "This is a default channel. You may change the default channel in the General page. Default channels cannot be deleted.",
+      "create-new-channel": "Create New Channel",
+      "permission": {
+        "send-message": "Send Messages"
+      },
+      "rate-limit-seconds": "Rate Limit (seconds)",
+      "text-channel": "Text Channel",
+      "html-channel": "HTML Channel (WIP)"
+    },
+    "banned-users": {
+      "notice": "Unban members from here",
+      "unbanning": "Unbanning...",
+      "unban": "Unban"
+    },
+    "manage-invites": {
+      "notice": "Only admins can see everyone's invites.",
+      "create-invites": "Create Invites",
+      "custom-invite": "Custom Invite",
+      "save-custom-link": "Save Custom Link",
+      "create-invite": "Create Invite",
+      "link": "Link",
+      "creator": "Creator",
+      "uses": "Uses"
+    },
+    "manage-users": {
+      "search-user": "Search User"
+    },
+    "delete-server": {
+      "type-server-name-to-confirm": "Type server name to confirm",
+      "deleting": "Deleting..."
+    },
+    "notifications": {
+      "description": "Change notification settings.",
+      "notice": "These settings will only apply to you and won't affect others.",
+      "enable-notifications": "Enable Notifications",
+      "mute-sound": "Mute Sound",
+      "disable-notifications": "Disable Notifications"
+    }
+  },
+  "typing-status": {
+    "is-typing": "{0} is typing...",
+    "two-are-typing": "{0} and {1} are typing...",
+    "three-are-typing": "{0}, {1} and {2} are typing...",
+    "more-than-three": "{0} people are typing..."
+  },
+  "dm-tab": {
+    "friends": "Friends",
+    "recents": "Recents",
+    "saved-notes": "Saved Notes",
+    "add-friend": "Add Friend"
+  },
+  "dashboard-tab": {
+    "profile": "Profile",
+    "notifications": "Notifications",
+    "click-to-add-custom-status": "Click to add custom status",
+    "caught-up": "All Caught Up!",
+    "direct-messages": "Direct Messages",
+    "servers": "Servers",
+    "explore": "Explore",
+    "dashboard": "Dashboard"
+  },
+  "add-friend-popout": {
+    "notice": "Add a friend by typing their username and tag.",
+    "adding": "Adding..."
+  },
+  "add-server-popout": {
+    "title": "Add Server",
+    "join-server-notice": "Join a server by entering in an invite code.",
+    "create-server-notice": "Create your own server. Start by naming your server.",
+    "tabs": {
+      "join": "Join",
+      "create": "Create"
+    }
+  },
+  "presence": {
+    "offline": "Offline",
+    "online": "Online",
+    "away": "Away",
+    "busy": "Busy",
+    "looking-to-play": "Looking To Play"
+  },
+  "right-drawer": {
+    "server-members": "Members ({0})",
+    "server-offline-members": "Offline ({0})"
+  },
+  "profile-popout": {
+    "common-friends": "Common Friends",
+    "badges": "Badges",
+    "joined-at": "Joined",
+    "suspended": "Suspended",
+    "remove-friend": "Remove Friend",
+    "accept-request": "Accept Request",
+    "cancel-request": "Cancel Request",
+    "add-friend": "Add Friend",
+    "send-message": "Send Message",
+    "common-servers": "Common Servers"
+  },
+  "connection": {
+    "loading": "Loading...",
+    "ready": "Ready!",
+    "authenticating": "Authenticating..."
+  },
+  "navbar": {
+    "update": "Update",
+    "update-available": "Update Available"
+  },
+  "generic": {
+    "copy": "Copy",
+    "delete": "Delete",
+    "copied": "Copied!",
+    "user": "User"
+  },
+  "messages": {
+    "left": "left the server",
+    "kicked": "has been kicked",
+    "banned": "has been banned",
+    "joined": "joined the server!"
+  },
+  "could-not-connect-to-server": "Could not connect to server.",
+  "chat-area": {
+    "rate-limit-mode": "Rate Limit Mode"
+  }
+}

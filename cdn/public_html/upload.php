@@ -11,7 +11,7 @@ if (!empty($target_isEmoji) and $target_isEmoji === "1") {
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $target_secret = $_POST['secret'];
 
-$secret = $_ENV["VUE_APP_FILE_CDN_SECRET"];
+$secret = $_ENV["FILE_CDN_SECRET"];
 
 $uploadOk = 1;
 

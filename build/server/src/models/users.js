@@ -64,7 +64,7 @@ const usersSchema = new Schema({
     type: Number,
     select: false,
   },
-  uniqueID: {
+  id: {
     type: String,
     unique: true
   },
@@ -74,6 +74,10 @@ const usersSchema = new Schema({
     select: false
   },
   avatar: {
+    type: String,
+    default: null
+  },
+  banner: {
     type: String,
     default: null
   },
@@ -89,16 +93,11 @@ const usersSchema = new Schema({
       4 // Looking to play
     ]
   },
-  admin: {
-    type: Number,
-    default: 0,
+  type: {
+    type: String,
     enum: [
-      0, // Member 
-      1, // Admin
-      2, // Mod
-      3, // Creator,
-      4, // cute
-      5, // supporter
+      "CREATOR",
+      "ADMIN"
     ]
   },
   friends: {
@@ -118,7 +117,15 @@ const usersSchema = new Schema({
     select: false
   },
   badges: {
-    type: [{ type: Number }],
+    // "CREATOR": 1,
+    // "CUTE": 2,
+    // "DEVELOPER": 4,
+    // "SUPPORTER": 8,
+    // "IDEA_QUEEN": 16,
+    // "BUG_CATCHER": 32,
+    // "TRANSLATOR": 64,
+    // "CONTRIBUTOR": 128
+    type: Number,
     select: false,
   },
   about_me: {
@@ -155,8 +162,8 @@ usersSchema.pre('save', async function (next) {
       this.password = passwordHash;
     }
 
-    // generate uniqueID
-    this.uniqueID = flake.gen();
+    this.id = flake.gen();
+
     // generate tag
     this.tag = generateString(4);
     if (!this.bot) {

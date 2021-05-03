@@ -7,7 +7,7 @@ export default async function deleteBot(req: Request, res: Response) {
   const { bot_id } = req.params;
   try {
     const bot: any = await Users.exists({
-      uniqueID: bot_id,
+      id: bot_id,
       bot: true,
       createdBy: req.user._id,
     });
@@ -15,7 +15,7 @@ export default async function deleteBot(req: Request, res: Response) {
 
     let error = false;
     await Users.updateOne(
-      { uniqueID: bot_id },
+      { id: bot_id },
       {
         $set: {
           username: "Deleted Bot " + (Math.floor(Math.random() * 100000) + 1),
@@ -50,15 +50,13 @@ export default async function deleteBot(req: Request, res: Response) {
 }
 
 
-async function kickBot(io: socketio.Server, uniqueID: string) {
-  await redis.deleteSession(uniqueID);
-  const rooms = io.sockets.adapter.rooms[uniqueID];
-  if (!rooms || !rooms.sockets) return;
-
-  for (const clientId in rooms.sockets) {
-    const client = io.sockets.connected[clientId];
-    if (!client) continue;
-    client.emit("auth_err", "Token outdated.");
-    client.disconnect(true);
-  }
+async function kickBot(io: any, bot_id: string) {
+  await redis.deleteSession(bot_id);
+  io.in(bot_id).clients((err: any, clients: any[]) => {
+    for (let i = 0; i < clients.length; i++) {
+      const id = clients[i];
+      io.to(id).emit("auth_err", "Token outdated.");
+      io.of('/').adapter.remoteDisconnect(id, true) 
+    }
+  });
 }

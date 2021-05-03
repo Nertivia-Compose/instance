@@ -1,27 +1,26 @@
 const Users = require("../../models/users");
 const BannedIPs = require("../../models/BannedIPs");
 const bcrypt = require('bcryptjs');
-import config from '../../config';
 const sio = require("socket.io");
 import nodemailer from 'nodemailer';
 const transporter = nodemailer.createTransport({
-  service: config.nodemailer.service,
+  service: process.env.SMTP_SERVICE,
   auth: {
-    user: config.nodemailer.user,
-    pass: config.nodemailer.pass
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS
   }
 })
 
 
 module.exports = async (req, res, next) => {
-  const {uniqueID, password} = req.body;
+  const {id, password} = req.body;
   const code = req.params.code;
   req.session.destroy();
 
 
   // Find the user given the email
-  const user = await Users.findOne({uniqueID}).select(
-    "email avatar status admin _id username uniqueID tag created GDriveRefreshToken banned email_confirm_code passwordVersion reset_password_code"
+  const user = await Users.findOne({id: id}).select(
+    "email avatar status admin _id username id tag created GDriveRefreshToken banned email_confirm_code passwordVersion reset_password_code"
   );
 
   // If not, handle it
@@ -75,10 +74,10 @@ module.exports = async (req, res, next) => {
 
 
 
-  kickUser(req.io, user.uniqueID)
+  kickUser(req.io, user.id)
   // send email
   const mailOptions = {
-    from: config.nodemailer.from,
+    from: process.env.SMTP_FROM,
     to: user.email.toLowerCase().trim(), 
     subject: 'Nertivia - Password Changed',
     html: `<p>Hello, ${user.username}!<br> Your password was changed. If this was not done by you, reset your password as soon as possible.`
@@ -95,15 +94,15 @@ module.exports = async (req, res, next) => {
  * @param {sio.Server} io
  */
 // also used in user update password.
-async function kickUser(io, uniqueID, socketID) {
-  const rooms = io.sockets.adapter.rooms[uniqueID];
-  if (!rooms || !rooms.sockets) return;
+async function kickUser(io, user_id, socketID) {
 
-  for (const clientId in rooms.sockets) {
-    const client = io.sockets.connected[clientId];
-    if (!client) continue;
-    if (client.id === socketID) continue;
-    client.emit("auth_err", "Password Changed.");
-    client.disconnect(true);
-  }
+
+  io.in(user_id).clients((err, clients) => {
+    for (let i = 0; i < clients.length; i++) {
+      const id = clients[i];
+      if (id === socketID) continue;
+      io.to(id).emit("auth_err", "Password Changed.");
+      io.of('/').adapter.remoteDisconnect(id, true) 
+    }
+  });
 }

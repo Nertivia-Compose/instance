@@ -1,14 +1,13 @@
 const User = require('../../models/users');
 const BannedIPs = require("../../models/BannedIPs");
-import config from '../../config'
 import nodemailer from 'nodemailer';
 import validate from 'deep-email-validator'
 import blacklistArr from '../../emailBlacklist.json'
 const transporter = nodemailer.createTransport({
-  service: config.nodemailer.service,
+  service: process.env.SMTP_SERVICE,
   auth: {
-    user: config.nodemailer.user,
-    pass: config.nodemailer.pass
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS
   }
 })
 
@@ -66,9 +65,15 @@ module.exports = async (req, res, next) => {
   const newUser = new User({ username, email: email.toLowerCase(), password, ip: req.userIP });
   const created = await newUser.save();
 
+  if (process.env.DEV_MODE === "true") {
+    return res.status(403).json({
+      errors: [{param: "other", msg: "Dev mode. email confirm code: " + created.email_confirm_code}]
+    });
+  }
+
   // send email
   const mailOptions = {
-    from: config.nodemailer.from,
+    from: process.env.SMTP_FROM,
     to: email.toLowerCase().trim(), 
     subject: 'Nertivia - Confirmation Code',
     html: `<p>Your confirmation code is: <strong>${created.email_confirm_code}</strong></p>`

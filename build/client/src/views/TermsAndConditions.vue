@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <custom-header @registerButton="$router.push('/register')" />
+  <div class="tos">
+    <Header />
     <div class="content">
       <div class="title">Nertivia Terms and Conditions of Use</div>
       <div class="updated-date">Last updated: Friday 05 October 2020</div>
@@ -15,13 +15,12 @@
 
       <div class="sub-title">1. Terms</div>
       <p>
-        By accessing this Website, accessible from
-        https://nertivia.net, you are agreeing to be bound by these
-        Website Terms and Conditions of Use and agree that you are responsible
-        for the agreement with any applicable local laws. If you disagree with
-        any of these terms, you are prohibited from accessing this site. The
-        materials contained in this Website are protected by copyright and trade
-        mark law.
+        By accessing this Website, accessible from https://nertivia.net, you are
+        agreeing to be bound by these Website Terms and Conditions of Use and
+        agree that you are responsible for the agreement with any applicable
+        local laws. If you disagree with any of these terms, you are prohibited
+        from accessing this site. The materials contained in this Website are
+        protected by copyright and trade mark law.
       </p>
       <div class="sub-title">2. Use License</div>
       <p>
@@ -122,41 +121,21 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import CustomHeader from "@/components/homePage/Header";
+import { Component, Vue } from "vue-property-decorator";
+import Header from "@/components/home-page/Header.vue";
 
-export default Vue.extend({
-  components: {
-    CustomHeader
-  },
-  methods: {}
-});
+@Component({ components: { Header } })
+export default class Home extends Vue {}
 </script>
 
 <style scoped lang="scss">
-@import "@/styles/global";
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-#app {
+.tos {
   color: white;
   display: flex;
   flex-direction: column;
   overflow: auto;
   align-items: center;
   align-content: center;
-}
-
-.content {
-  max-width: 700px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 30px;
 }
 .title {
   font-size: 24px;
@@ -170,8 +149,11 @@ export default Vue.extend({
   font-size: 12px;
   opacity: 0.8;
 }
-a {
-  color: #68aaff;
+.content {
+  max-width: 700px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 30px;
 }
 p {
   color: rgba(255, 255, 255, 0.8);

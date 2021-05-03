@@ -1,13 +1,12 @@
 import request from 'request';
-import config from '../../config';
 
 export function uploadFile(BufferOrStream: any, userid: string, fileid: string, filename: string, isEmoji?: Boolean) {
   return new Promise((resolve, reject) => {
 
     const options: request.Options = {
-      url: `${process.env.VUE_APP_CDN_DOMAIN}/${process.env.VUE_APP_IMAGE_UPLOAD_FILE}`,
+      url: `${process.env.VUE_APP_NERTIVIA_CDN}upload.php`,
       formData: {
-        secret: config.fileCDNSecret,
+        secret: process.env.FILE_CDN_SECRET,
         userid: userid || "",
         fileid: fileid || "",
         isemoji: isEmoji ? "1" : "0",
@@ -29,9 +28,9 @@ export function uploadFile(BufferOrStream: any, userid: string, fileid: string, 
 export function deletePath(path: string) {
   return new Promise((resolve, reject) => {
     const options: request.Options = {
-      url: `${process.env.VUE_APP_CDN_DOMAIN}/${process.env.VUE_APP_IMAGE_DELETE_FILE}`,
+      url: `${process.env.VUE_APP_NERTIVIA_CDN}remove.php`,
       json: {
-        secret: config.fileCDNSecret,
+        secret: process.env.FILE_CDN_SECRET,
         removePath: path
       }
     }

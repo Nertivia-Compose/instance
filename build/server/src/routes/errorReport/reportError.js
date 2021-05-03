@@ -1,7 +1,7 @@
 const Messages = require("../../models/messages");
 const Users = require("../../models/users");
 const Channels = require("../../models/channels");
-
+const sendMessageNotification = require('../../utils/SendMessageNotification')
 // create a bot in nertivia, create a server and copy the channel iDID
 const bot_id = "6768469612037148672"
 const channel_id = "6768469298621976576"
@@ -10,7 +10,7 @@ const server_id = "6768469298621976577"
 module.exports = async (req, res, next) => {
   const { message, name, stack, user_message, url } = req.body;
 
-  const bot = await Users.findOne({uniqueID: bot_id});
+  const bot = await Users.findOne({id: bot_id});
   if (!bot) {
     res.status(403).json({message: "Bot could not be found."});
     return;
@@ -32,16 +32,11 @@ module.exports = async (req, res, next) => {
 res.json({message: "Done!"});
 
   const io = req.io;
-  const clients =
-    io.sockets.adapter.rooms["server:" + server_id]
-      ?.sockets;
-  if (!clients) return;
-  for (let clientId in clients) {
-    io.to(clientId).emit("receiveMessage", {
-      message: messageCreated
-    });
 
-  }
+  io.to("server:" + server_id).emit("receiveMessage", {
+    message: messageCreated
+  })
+
   //send notification
   await sendMessageNotification({
     message: messageCreated,

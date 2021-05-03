@@ -9,7 +9,7 @@ const redis = require("../../../redis");
 module.exports = async (req, res, next) => {
   const { server_id, member_id, role_id } = req.params;
 
-  const user = await Users.findOne({uniqueID: member_id});
+  const user = await Users.findOne({id: member_id});
 
   if (!user) {
     return res
@@ -68,7 +68,7 @@ module.exports = async (req, res, next) => {
   const io = req.io;
   io.in("server:" + req.server.server_id).emit("server_member:remove_role", {
     role_id: role_id,
-    uniqueID: member_id,
+    id: member_id,
     server_id: server_id,
   });  
   

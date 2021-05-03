@@ -56,4 +56,4 @@ app.all("/*", (res, req) => {
     req.status(404).send("Invalid Image.")
 })
 
-server.listen(process.env.VUE_APP_CDN_PORT);
+server.listen(process.env.CDN_PORT);

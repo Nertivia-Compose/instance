@@ -1,13 +1,12 @@
 const Users = require("../../models/users");
 const BannedIPs = require("../../models/BannedIPs");
 const JWT = require("jsonwebtoken");
-import config from '../../config';
 
-function signToken(uniqueID, pwdVer) {
+function signToken(user_id, pwdVer) {
   if (pwdVer !== undefined) {
-    return JWT.sign(`${uniqueID}-${pwdVer}`, config.jwtSecret);
+    return JWT.sign(`${user_id}-${pwdVer}`, process.env.JWT_SECRET);
   } else {
-    return JWT.sign(uniqueID, config.jwtSecret);
+    return JWT.sign(user_id, process.env.JWT_SECRET);
   }
 }
 
@@ -26,7 +25,7 @@ module.exports = async (req, res, next) => {
   }
   // Find the user given the email
   const user = await Users.findOne(obj).select(
-    "avatar status admin _id username uniqueID tag created GDriveRefreshToken password banned email_confirm_code passwordVersion"
+    "avatar status badges _id username id tag created GDriveRefreshToken password banned email_confirm_code passwordVersion"
   );
 
   // If not, handle it
@@ -73,7 +72,7 @@ module.exports = async (req, res, next) => {
   user.password = undefined;
 
   // Generate token without header information
-  const token = signToken(user.uniqueID, user.passwordVersion)
+  const token = signToken(user.id, user.passwordVersion)
     .split(".")
     .splice(1)
     .join(".");
@@ -81,7 +80,7 @@ module.exports = async (req, res, next) => {
   const data = {
     username: user.username,
     tag: user.tag,
-    uniqueID: user.uniqueID,
+    id: user.id,
     avatar: user.avatar
   };
 

@@ -18,18 +18,18 @@ module.exports = async (req, res, next) => {
   const channelIDArray = channels.map(c => c.channelID)
 
   // Leave server
-  await deleteFCMFromServer(req.server.server_id, req.user.uniqueID);
+  await deleteFCMFromServer(req.server.server_id, req.user.id);
 
   // delete all leavers notification from the server 
   if (channelIDArray) {
     await Notifications.deleteMany({
       channelID: { $in: channelIDArray },
-      recipient: req.user.uniqueID
+      recipient: req.user.id
     });
   }
 
 
-  await redis.remServerMember(req.user.uniqueID, req.server.server_id);
+  await redis.remServerMember(req.user.id, req.server.server_id);
 
   // remove server from users server list.
   await User.updateOne(
@@ -48,20 +48,23 @@ module.exports = async (req, res, next) => {
 
 
   // leave room
-  const rooms = io.sockets.adapter.rooms[req.user.uniqueID];
-  if (rooms)
-    for (let clientId in rooms.sockets || []) {
-      if (io.sockets.connected[clientId]) {
-        io.sockets.connected[clientId].emit("server:leave", {
-          server_id: req.server.server_id
-        });
-        io.sockets.connected[clientId].leave("server:" + req.server.server_id);
-      }
+
+
+  io.in(req.user.id).clients((err, clients) => {
+    for (let i = 0; i < clients.length; i++) {
+      const id = clients[i];
+      io.to(id).emit("server:leave", {
+        server_id: req.server.server_id
+      });
+      io.of('/').adapter.remoteLeave(id, "server:" + req.server.server_id)
     }
+  });
+
+
 
   // emit leave event 
   io.in("server:" + req.server.server_id).emit("server:member_remove", {
-    uniqueID: req.user.uniqueID,
+    id: req.user.id,
     server_id: req.server.server_id
   });
 
@@ -77,7 +80,7 @@ module.exports = async (req, res, next) => {
 
   
   const user = {
-    uniqueID: req.user.uniqueID,
+    id: req.user.id,
     username: req.user.username,
     tag: req.user.tag,
     avatar: req.user.avatar,
@@ -87,14 +90,10 @@ module.exports = async (req, res, next) => {
   messageCreated.creator = user;
 
   // emit message
-  const roomsMsg = io.sockets.adapter.rooms["server:" + req.server.server_id];
-  if (roomsMsg)
-    for (let clientId in roomsMsg.sockets || []) {
-      io.to(clientId).emit("receiveMessage", {
-        message: messageCreated
-      });
-    }
 
+  io.in("server:" + req.server.server_id).emit("receiveMessage", {
+    message: messageCreated
+  });
 
   const defaultChannel = await Channels.findOneAndUpdate({ channelID: req.server.default_channel_id }, { $set: {
     lastMessaged: Date.now()

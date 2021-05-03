@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <custom-header @registerButton="$router.push('/register')" />
+  <div class="privacy">
+    <Header />
     <div class="content">
       <div class="title">Nertivia Privacy Policy</div>
       <div class="updated-date">Last updated: Friday 27 December 2020</div>
@@ -66,41 +66,21 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import CustomHeader from "@/components/homePage/Header";
+import { Component, Vue } from "vue-property-decorator";
+import Header from "@/components/home-page/Header.vue";
 
-export default Vue.extend({
-  components: {
-    CustomHeader
-  },
-  methods: {}
-});
+@Component({ components: { Header } })
+export default class Home extends Vue {}
 </script>
 
 <style scoped lang="scss">
-@import "@/styles/global";
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-#app {
+.privacy {
   color: white;
   display: flex;
   flex-direction: column;
   overflow: auto;
   align-items: center;
   align-content: center;
-}
-
-.content {
-  max-width: 700px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 30px;
 }
 .title {
   font-size: 24px;
@@ -114,8 +94,11 @@ export default Vue.extend({
   font-size: 12px;
   opacity: 0.8;
 }
-a {
-  color: #68aaff;
+.content {
+  max-width: 700px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 30px;
 }
 p {
   color: rgba(255, 255, 255, 0.8);

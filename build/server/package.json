@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "compile": "tsc && npm run copyPublic && node dist",
+    "compile": "tsc && npm run copyEnv && node dist",
     "build": "tsc",
-    "copyPublic": "copyfiles -u 1 src/public/avatars/*  dist",
-    "runCompiled": "npm run copyPublic && node dist",
+    "copyEnv": "copyfiles -f ./.env dist",
+    "runCompiled": "npm run copyEnv && node dist",
     "watch": "tsc-watch --onSuccess \"npm run runCompiled\""
   },
   "keywords": [],
@@ -39,6 +39,7 @@
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "deep-email-validator": "^0.1.18",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "express-socket.io-session": "^1.3.5",
@@ -62,6 +63,7 @@
     "request": "^2.88.2",
     "sharp": "^0.25.4",
     "socket.io": "^2.3.0",
+    "socket.io-redis": "^5.4.0",
     "vhost": "^3.0.2"
   },
   "devDependencies": {

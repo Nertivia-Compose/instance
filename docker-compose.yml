@@ -9,20 +9,20 @@ services:
     volumes:
       - mongodata:/data/db
     ports:
-      - "127.0.0.1:${VUE_APP_MONGODB_PORT}:27017"
+      - "127.0.0.1:${MONGODB_PORT}:27017"
     networks:
       - shared
   server:
     image: nertivia/server
     ports:
-      - "${VUE_APP_SERVER_PORT}:${VUE_APP_SERVER_PORT}"
+      - "${SERVER_PORT}:${SERVER_PORT}"
     env_file: .env
     networks:
       - shared
   client:
     image: nertivia/client
     ports:
-      - "${VUE_APP_CLIENT_PORT}:${VUE_APP_CLIENT_PORT}"
+      - "${CLIENT_PORT}:${CLIENT_PORT}"
     env_file: .env
     networks:
       - shared
@@ -53,7 +53,7 @@ services:
     volumes:
       - "./cdn/public_html:/public_html"
     ports:
-      - "${VUE_APP_CDN_PORT}:${VUE_APP_CDN_PORT}"
+      - "${CDN_PORT}:${CDN_PORT}"
     env_file: .env
     networks:
       - shared

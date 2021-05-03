@@ -1,0 +1,52 @@
+{
+  "account": {
+    "name": "Account",
+    "icon": "account_circle",
+    "component": "Account"
+  },
+  "notification": {
+    "name": "Notification",
+    "icon": "notifications",
+    "component": "Notification"
+  },
+  "manage-emojis": {
+    "name": "Manage Emojis",
+    "icon": "face",
+    "component": "ManageEmojis"
+  },
+  "startup-options": {
+    "name": "Startup Options",
+    "icon": "launch",
+    "component": "StartupOptions"
+  },
+  "program-activity": {
+    "name": "Program Activity",
+    "icon": "widgets",
+    "component": "ProgramActivity"
+  },
+  "manage-bots": {
+    "name": "Manage Bots",
+    "icon": "adb",
+    "component": "ManageBots"
+  },
+  "interface": {
+    "name": "Interface",
+    "icon": "view_quilt",
+    "component": "Interface"
+  },
+  "language": {
+    "name": "Language",
+    "icon": "flag",
+    "component": "Language"
+  },
+  "wip-features": {
+    "name": "WIP Features",
+    "icon": "science",
+    "component": "WIPFeatures"
+  },
+  "delete-account": {
+    "name": "Delete Account",
+    "icon": "delete",
+    "component": "DeleteAccount"
+  }
+}

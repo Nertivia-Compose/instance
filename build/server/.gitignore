@@ -1,4 +1,7 @@
 node_modules/
+src/config.ts
 src/public/
 src/fb-fcm.json
 dist
+.env
+server.env

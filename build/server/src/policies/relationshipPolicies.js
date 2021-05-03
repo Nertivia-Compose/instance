@@ -10,11 +10,11 @@ const policies = {
     policyHandler
   ],
   put: [
-    check('uniqueID').not().isEmpty().withMessage('uniqueID is required.'),
+    check('id').not().isEmpty().withMessage('id is required.'),
     policyHandler
   ],
   delete: [
-    check('uniqueID').not().isEmpty().withMessage('uniqueID is required.'),
+    check('id').not().isEmpty().withMessage('id is required.'),
     policyHandler
   ]
 
