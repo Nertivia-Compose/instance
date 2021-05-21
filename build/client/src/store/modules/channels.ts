@@ -16,6 +16,7 @@ import DmChannelWithUser from "@/interfaces/DmChannelWithUser";
 import Vue from "vue";
 import { ServersModule } from "./servers";
 import { MessagesModule } from "./messages";
+import { NotificationsModule } from "./notifications";
 
 interface ChannelObj {
   [key: string]: Channel;
@@ -70,6 +71,7 @@ class Channels extends VuexModule {
     return (channelID: string) => {
       const channel = this.channels[channelID];
       if (!channel) return;
+      if (channel.server_id) return;
       const recipients = channel.recipients?.map(id => UsersModule.users[id]);
       return { ...channel, recipients };
     };
@@ -124,6 +126,7 @@ class Channels extends VuexModule {
     if (!channels?.length) return;
     for (let i = 0; i < channels.length; i++) {
       const channel = channels[i];
+      NotificationsModule.DeleteNotification(channel.channelID)
       this.RemoveChannel(channel.channelID);
     }
   }

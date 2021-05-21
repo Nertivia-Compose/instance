@@ -1,21 +1,21 @@
 <template>
   <div class="explore-area">
     <Header v-if="page" :title="page.name" />
-    <component v-if="page" :is="page.component" />
+    WIP
+    <!-- <component v-if="page" :is="page.component" /> -->
   </div>
 </template>
 
 <script>
 import Header from "@/components/Header.vue";
 import ExploreServers from "./ExploreServers.vue";
-import ExploreThemes from "./ExploreThemes.vue";
 import { Vue, Component } from "vue-property-decorator";
 import explorePages from "@/utils/explorePages";
-@Component({ components: { Header, ExploreServers, ExploreThemes } })
+@Component({ components: { Header, ExploreServers } })
 export default class ExploreArea extends Vue {
   mounted() {
     if (!this.page) {
-      this.$router.push("/app/explore/servers");
+      this.$router.push("/app/admin-panel/overview");
     }
   }
   get page() {

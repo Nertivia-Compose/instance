@@ -24,6 +24,7 @@ import {
 import "./Markup.scss";
 import emojiParser from "@/utils/emojiParser";
 import { VNode } from "vue/types/umd";
+import User from "@/interfaces/User";
 
 interface MarkupProps {
   text: string;
@@ -145,7 +146,11 @@ function transformCustomEntity(
   const expr = sliceText(ctx, entity.innerSpan, { countText: false });
   switch (type) {
     case "@": {
-      const user = UsersModule.users[expr];
+      let user = ctx.props.message?.mentions?.find(m => m.id === expr)
+      if (!user) {
+        user = UsersModule.users[expr];
+      }
+      
       if (user) {
         ctx.textCount += expr.length;
         return h(MentionUser, {
@@ -158,7 +163,7 @@ function transformCustomEntity(
     }
     case "#": {
       const channel = ChannelsModule.channels[expr];
-      if (channel) {
+      if (channel && channel.server_id) {
         ctx.textCount += expr.length;
         return h(MentionChannel, { props: { channel } });
       }

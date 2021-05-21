@@ -5,63 +5,30 @@
         class="item"
         v-for="(page, index) in pages"
         :key="index"
-        :class="{ selected: page.id === currentSettingTab }"
+        :class="{ selected: page.id === currentTab }"
         @click="changeTab(page.id)"
       >
         <div class="material-icons">{{ page.icon }}</div>
-        <div class="name">{{ $t(`server-settings.tab-names.${page.id}`) }}</div>
+        <div class="name">{{ page.name }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { MeModule } from "@/store/modules/me";
-import { ServerMembersModule } from "@/store/modules/serverMembers";
-import { ServersModule } from "@/store/modules/servers";
 import { Component, Vue } from "vue-property-decorator";
 
-import settingsPages from "@/utils/serverSettingsPages.json";
+import adminPanelPages from "@/utils/adminPanelPages.json";
 import { DrawersModule } from "@/store/modules/drawers";
-import { permissions } from "@/constants/rolePermissions";
 @Component
-export default class MainApp extends Vue {
+export default class AdminPanelDrawer extends Vue {
+  pages = adminPanelPages;
   changeTab(path: string) {
     DrawersModule.SetLeftDrawer(false);
     this.$router.push({ params: { tab: path } });
   }
-  get currentSettingTab() {
+  get currentTab() {
     return this.$route.params.tab;
-  }
-  get serverID() {
-    return this.$route.params.server_id;
-  }
-  get server() {
-    return ServersModule.servers[this.serverID];
-  }
-  get isAdmin() {
-    return ServerMembersModule.isAdmin(
-      MeModule.user.id || undefined,
-      this.serverID
-    );
-  }
-  get isCreator() {
-    return this.server?.creator?.id === MeModule.user.id;
-  }
-  get pages() {
-    return Object.values(settingsPages).filter((p: any) => {
-      const isAdminOrCreator = this.isCreator || this.isAdmin;
-      if (p.owner && !this.isCreator) return false;
-      if (p.permission && !isAdminOrCreator) {
-        return ServerMembersModule.memberHasPermission(
-          MeModule.user.id || "",
-          this.serverID,
-          permissions[p.permission].value
-        );
-      }
-      if (p.admin && !isAdminOrCreator) return false;
-      return true;
-    });
   }
 }
 </script>

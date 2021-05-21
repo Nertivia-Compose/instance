@@ -28,7 +28,7 @@
       class="item"
       :class="{
         selected: currentTab === 'dms',
-        notification: dmNotificationExists
+        notification: dmNotificationExists || friendRequestExists
       }"
       :title="$t('dashboard-tab.direct-messages')"
       @click="changeTab('dms')"
@@ -48,6 +48,18 @@
     >
       <div class="icon material-icons">dns</div>
       <div class="title">Servers</div>
+    </div>
+    <div
+      class="item"
+      :class="{
+        selected: currentTab === 'admin-panel'
+      }"
+      v-if="isAdmin"
+      title="Admin Panel"
+      @click="changeTab('admin-panel')"
+    >
+      <div class="icon material-icons">security</div>
+      <div class="title">Admin Panel</div>
     </div>
     <div
       class="item update"
@@ -95,6 +107,7 @@ const AvatarImage = () =>
 import userStatuses from "@/constants/userStatuses";
 import { AppUpdateModule } from "@/store/modules/appUpdate";
 import { DrawersModule } from "@/store/modules/drawers";
+import { FriendsModule, FriendStatus } from "@/store/modules/friends";
 import { LastSeenServerChannelsModule } from "@/store/modules/lastSeenServerChannel";
 import { LastSelectedServersModule } from "@/store/modules/lastSelectedServer";
 import { MeModule } from "@/store/modules/me";
@@ -147,6 +160,9 @@ export default class NavBar extends Vue {
   get me() {
     return MeModule.user;
   }
+  get isAdmin() {
+    return this.me.type === "CREATOR" || this.me.type === "ADMIN";
+  }
   get serverMentioned() {
     return LastSeenServerChannelsModule.allServerNotifications.find(
       c => c.mentioned
@@ -157,6 +173,12 @@ export default class NavBar extends Vue {
   }
   get dmNotificationExists() {
     return NotificationsModule.allDMNotifications.length > 0;
+  }
+  get friendRequestExists() {
+    return this.friends.find(f => f.status === FriendStatus.PENDING);
+  }
+  get friends() {
+    return FriendsModule.friendsWithUser;
   }
   get presence() {
     if (!this.me?.id || !MeModule.connected) return userStatuses[0];

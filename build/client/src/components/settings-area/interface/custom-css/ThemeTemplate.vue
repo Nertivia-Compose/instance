@@ -5,6 +5,11 @@
     </div>
     <div class="options" :class="{ show: showOptions }">
       <CustomButton
+        name="Publish"
+        @click="$emit('publish', theme.id)"
+        icon="public"
+      />
+      <CustomButton
         name="Apply"
         @click="apply"
         v-if="!applied"

@@ -9,6 +9,10 @@ const ExploreArea = () =>
   import(
     /* webpackChunkName: "ExploreArea" */ "../components/explore-area/ExploreArea.vue"
   );
+const AdminPanelArea = () =>
+  import(
+    /* webpackChunkName: "AdminPanelArea" */ "../components/admin-panel-area/AdminPanelArea.vue"
+  );
 const SettingsArea = () =>
   import(
     /* webpackChunkName: "SettingsArea" */ "../components/settings-area/SettingsArea.vue"
@@ -115,7 +119,7 @@ const routes: Array<RouteConfig> = [
     path: "/app",
     children: [
       {
-        path: "servers/:server_id/settings/:tab?",
+        path: "servers/:server_id/settings/:tab?/:id?",
         component: ServerSettingsArea,
         name: "server-settings"
       },
@@ -129,6 +133,7 @@ const routes: Array<RouteConfig> = [
       { path: "dms/", component: DashboardArea },
       { path: "settings/:tab?", component: SettingsArea },
       { path: "explore/:tab?", component: ExploreArea },
+      { path: "admin-panel/:tab?", component: AdminPanelArea },
       { path: "/", component: DashboardArea },
       { path: "*" }
     ],

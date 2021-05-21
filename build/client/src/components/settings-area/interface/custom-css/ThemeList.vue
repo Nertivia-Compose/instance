@@ -13,6 +13,7 @@
         @clicked="clickedID = theme.id"
         @delete="deleteTheme"
         @edit="$emit('edit', theme.id)"
+        @publish="$emit('publish', theme)"
         @applied="appliedThemeID = theme.id"
         @unapplied="appliedThemeID = null"
         :applied="appliedThemeID === theme.id"
@@ -48,7 +49,8 @@ export default class ThemeList extends Vue {
   createTheme() {
     createTheme({
       name: "Untitled",
-      css: this.cssTemplate()
+      css: this.cssTemplate(),
+      client_version: this.$lastUIBreakingVersion
     }).then(theme => {
       this.themes?.push(theme);
       this.$emit("edit", theme.id);
