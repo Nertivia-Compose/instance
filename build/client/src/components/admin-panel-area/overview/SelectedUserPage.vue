@@ -1,5 +1,6 @@
 <template>
   <div class="selected-user-page">
+    <CustomButton name="Back" icon="arrow_back" @click="$emit('back')" />
     <div class="banner-profile" :class="{ banner: bannerURL }">
       <img v-if="bannerURL" :src="bannerURL" alt="" />
       <UserTemplate class="user-template" :user="user" />
@@ -19,12 +20,21 @@
       </div>
     </div>
     <div class="actions">
+      <CustomButton @click="viewProfile" name="View Profile" icon="person" />
       <CustomButton name="Edit User" icon="edit" />
       <CustomButton
         @click="openSuspendPopout"
         name="Suspend User"
         :alert="true"
         icon="block"
+        v-if="!user.banned"
+      />
+      <CustomButton
+        @click="openUnsuspendPopout"
+        name="Unsuspend User"
+        :alert="true"
+        icon="undo"
+        v-if="user.banned"
       />
     </div>
     <div class="main-title">Accounts created with same IP:</div>
@@ -65,8 +75,25 @@ export default class SelectedUserPage extends Vue {
     PopoutsModule.ShowPopout({
       id: "admin-suspend-user-popout",
       component: "AdminSuspendUser",
-      data: { user: this.user }
+      data: { user: this.user, callback: this.suspendCallback }
     });
+  }
+  openUnsuspendPopout() {
+    PopoutsModule.ShowPopout({
+      id: "admin-unsuspend-user-popout",
+      component: "AdminUnsuspendUser",
+      data: { user: this.user, callback: this.suspendCallback }
+    });
+  }
+  viewProfile() {
+    PopoutsModule.ShowPopout({
+      id: "profile",
+      component: "profile-popout",
+      data: { id: this.user?.id }
+    });
+  }
+  suspendCallback() {
+    this.$emit("suspended");
   }
   get bannerURL() {
     if (!this.user.banner) return null;

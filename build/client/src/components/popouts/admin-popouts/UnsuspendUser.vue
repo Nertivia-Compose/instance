@@ -11,20 +11,14 @@
             class="avatar"
           />
           <div class="text">
-            <span style="font-weight: bold">Suspend</span>
+            <span style="font-weight: bold">Unsuspend</span>
             {{ user.username }}?
           </div>
         </div>
         <div class="inner-content">
           <div class="description">
             <div class="error" v-if="error">{{ error }}</div>
-            <CustomInput
-              class="reason-input"
-              title="Reason"
-              v-model="reason"
-              :textArea="true"
-            />
-            <CheckBox name="IP Ban WIP" :checked="true" />
+            <CheckBox name="Remove IP Ban" :checked="true" />
             <CheckBox name="Send Email WIP" :checked="false" />
             <CustomInput
               class="password-input"
@@ -37,7 +31,7 @@
               <!-- TODO: i18n -->
               <CustomButton
                 @click="buttonClicked"
-                :name="requestSent ? 'Suspending...' : 'Suspend'"
+                :name="requestSent ? 'Unsuspending...' : 'Unsuspend'"
                 :alert="true"
               />
             </div>
@@ -72,7 +66,7 @@ export default class ProfilePopout extends Vue {
     callback: any;
   };
   close() {
-    PopoutsModule.ClosePopout("admin-suspend-user-popout");
+    PopoutsModule.ClosePopout("admin-unsuspend-user-popout");
   }
 
   backgroundClick(event: any) {
@@ -84,20 +78,20 @@ export default class ProfilePopout extends Vue {
     if (this.requestSent) return;
     this.requestSent = true;
     this.error = null;
-    suspendUser(this.data.user.id, this.password, this.reason)
-      .then(() => {
-        this.data.callback();
-        this.close();
-      })
-      .catch(async err => {
-        if (!err.response) {
-          this.error = "Could not connect to server.";
-          return;
-        }
-        const { message } = await err.response.json();
-        this.error = message;
-      })
-      .finally(() => (this.requestSent = false));
+    // suspendUser(this.data.user.id, this.password, this.reason)
+    //   .then(() => {
+    //     this.data.callback();
+    //     this.close();
+    //   })
+    //   .catch(async err => {
+    //     if (!err.response) {
+    //       this.error = "Could not connect to server.";
+    //       return;
+    //     }
+    //     const { message } = await err.response.json();
+    //     this.error = message;
+    //   })
+    //   .finally(() => (this.requestSent = false));
   }
   get user() {
     return this.data.user;
@@ -110,7 +104,7 @@ export default class ProfilePopout extends Vue {
   border-radius: 4px;
   width: 400px;
   overflow: hidden;
-  height: 430px;
+  height: 280px;
 }
 .animate-in {
   opacity: 0;

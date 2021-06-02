@@ -5,6 +5,7 @@ const sio = require("socket.io");
 const redis = require("../../redis");
 const { deleteAllUserFCM } = require("../../utils/sendPushNotification");
 const AdminActions = require("../../models/AdminActions");
+const { kickUser } = require("../../utils/kickUser");
 
 module.exports = async (req, res, next) => {
   const user_id = req.params.id;
@@ -39,6 +40,7 @@ module.exports = async (req, res, next) => {
   await AdminActions.create({
     action: "SUSPEND",
     admin: req.user._id,
+    reason: reasonDB,
     user: userToSuspend._id,
     date: Date.now()
   })
@@ -48,6 +50,8 @@ module.exports = async (req, res, next) => {
     ip_ban: userToSuspend.ip,
     date: Date.now()
   })
+
+
 
   const io = req.io;
 
@@ -68,9 +72,9 @@ module.exports = async (req, res, next) => {
     for (let index = 0; index < usersArr.length; index++) {
       const kick_user_id = usersArr[index].id;
       if (kick_user_id === user_id) {
-        await kickUser(io, kick_user_id, "You have been suspended for: " + reasonDB);
+        await kickUser(kick_user_id, "You have been suspended for: " + reasonDB)
       } else {
-        await kickUser(io, kick_user_id, "IP is banned.");
+        await kickUser(kick_user_id, "IP is banned.")
       }
     }
   }
@@ -78,18 +82,18 @@ module.exports = async (req, res, next) => {
   res.json("Account Suspended!");
 };
 
-/**
- *
- * @param {sio.Server} io
- */
-async function kickUser(io, user_id, message) {
-  await redis.deleteSession(user_id);
+// /**
+//  *
+//  * @param {sio.Server} io
+//  */
+// async function kickUser(io, user_id, message) {
+//   await redis.deleteSession(user_id);
 
-  io.in(user_id).clients((err, clients) => {
-    for (let i = 0; i < clients.length; i++) {
-      const id = clients[i];
-      io.to(id).emit("auth_err", message);
-      io.of('/').adapter.remoteDisconnect(id, true)
-    }
-  });
-}
+//   io.in(user_id).clients((err, clients) => {
+//     for (let i = 0; i < clients.length; i++) {
+//       const id = clients[i];
+//       io.to(id).emit("auth_err", message);
+//       io.of('/').adapter.remoteDisconnect(id, true)
+//     }
+//   });
+// }

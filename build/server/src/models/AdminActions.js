@@ -14,9 +14,15 @@ const AdminActionsSchema = new Schema({
     "APPROVE_THEME"
   ]},
   ip_ban: String,
+  reason: String,
   admin: { type: Schema.Types.ObjectId, ref: 'users'},
   user: { type: Schema.Types.ObjectId, ref: 'users'},
-  date: Date
+  date: Number,
+  expireAt: {
+    type: Date,
+    default: Date.now,
+    index: {expires: 398999 } // 4.6 days
+  },
 });
 
 
