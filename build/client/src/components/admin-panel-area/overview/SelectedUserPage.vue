@@ -20,7 +20,11 @@
       </div>
     </div>
     <div class="actions">
-      <CustomButton @click="viewProfile" name="View Profile" icon="person" />
+      <CustomButton
+        @click="viewProfile(user.id)"
+        name="View Profile"
+        icon="person"
+      />
       <CustomButton name="Edit User" icon="edit" />
       <CustomButton
         @click="openSuspendPopout"
@@ -38,11 +42,20 @@
       />
     </div>
     <div class="main-title">Accounts created with same IP:</div>
+    <div class="items">
+      <UserTemplate
+        v-for="ipUser in IPUsers"
+        :key="ipUser.id"
+        :user="ipUser"
+        :hover="true"
+        @click.native="viewProfile(ipUser.id)"
+      />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { ExpandedUser } from "@/services/adminService";
+import { ExpandedUser, searchUsersByIP } from "@/services/adminService";
 import { Vue, Component, Prop } from "vue-property-decorator";
 import UserTemplate from "./UserTemplate.vue";
 import CustomButton from "@/components/CustomButton.vue";
@@ -71,6 +84,13 @@ export default class SelectedUserPage extends Vue {
       }
     ];
   }
+  IPUsers: ExpandedUser[] = [];
+
+  async mounted() {
+    this.IPUsers = await searchUsersByIP(this.user.id);
+    this.IPUsers = this.IPUsers.filter(u => u.id !== this.user.id);
+  }
+
   openSuspendPopout() {
     PopoutsModule.ShowPopout({
       id: "admin-suspend-user-popout",
@@ -82,18 +102,21 @@ export default class SelectedUserPage extends Vue {
     PopoutsModule.ShowPopout({
       id: "admin-unsuspend-user-popout",
       component: "AdminUnsuspendUser",
-      data: { user: this.user, callback: this.suspendCallback }
+      data: { user: this.user, callback: this.unsuspendCallback }
     });
   }
-  viewProfile() {
+  viewProfile(id: string) {
     PopoutsModule.ShowPopout({
       id: "profile",
       component: "profile-popout",
-      data: { id: this.user?.id }
+      data: { id }
     });
   }
   suspendCallback() {
     this.$emit("suspended");
+  }
+  unsuspendCallback(removeIPBan: boolean) {
+    this.$emit("unsuspend", { removeIPBan });
   }
   get bannerURL() {
     if (!this.user.banner) return null;
@@ -107,10 +130,12 @@ export default class SelectedUserPage extends Vue {
   position: relative;
   border-radius: 4px;
   overflow: hidden;
+  flex-shrink: 0;
   margin: 10px;
   &.banner {
     height: 200px;
-    width: 400px;
+    max-width: 400px;
+    width: 100%;
     .user-template {
       position: absolute;
       bottom: 0;
@@ -130,7 +155,13 @@ export default class SelectedUserPage extends Vue {
 }
 
 .selected-user-page {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   padding: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
 }
 .actions {
   display: flex;
@@ -141,6 +172,8 @@ export default class SelectedUserPage extends Vue {
 }
 .more-details {
   margin-left: 10px;
+  max-width: 350px;
+  width: 100%;
 }
 .main-title {
   margin-left: 10px;
