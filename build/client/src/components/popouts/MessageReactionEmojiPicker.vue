@@ -19,7 +19,7 @@ import { PopoutsModule } from "@/store/modules/popouts";
 import { addReaction } from "@/services/messagesService";
 import { MessagesModule } from "@/store/modules/messages";
 import { Reaction } from "@/interfaces/Message";
-interface Prop {
+interface IProp {
   messageID: string;
   channelID: string;
   x: number;
@@ -27,7 +27,7 @@ interface Prop {
 }
 @Component({ components: { EmojiPicker } })
 export default class extends Vue {
-  @Prop() private data!: Prop;
+  @Prop() private data!: IProp;
   @Prop() private identity!: string;
   clickOutside(event: any) {
     if (event.target.closest(".context")) return;
@@ -36,6 +36,23 @@ export default class extends Vue {
 
   emojiPicked(event: { unicode: string; gif: boolean; emojiID: string }) {
     PopoutsModule.ClosePopout(this.identity);
+
+    const reactions = MessagesModule.messageReactions({
+      messageID: this.data.messageID,
+      channelID: this.data.channelID
+    });
+
+    if (reactions && reactions?.length > 10) {
+      PopoutsModule.ShowPopout({
+        id: "add-reaction-limit-reached",
+        component: "generic-popout",
+        data: {
+          title: "Reaction Limit",
+          description: "Reaction limit reached for this message."
+        }
+      });
+      return;
+    }
 
     let oldReaction: Reaction | undefined = MessagesModule.messageReaction({
       messageID: this.data.messageID,
@@ -103,33 +120,17 @@ export default class extends Vue {
 <style lang="scss" scoped>
 .context {
   pointer-events: all;
-  background: var(--context-menu-bg-color);
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
   position: absolute;
   border-radius: 4px;
-  overflow: hidden;
   z-index: 99999999999;
 }
 .content {
   display: flex;
   flex-direction: column;
-  opacity: 0;
-  animation: showUp 0.2s;
-  animation-fill-mode: forwards;
 }
-.emoji-picker {
+.emoji-picker.emoji-panel {
   position: relative;
   bottom: initial;
   right: initial;
-}
-@keyframes showUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 </style>

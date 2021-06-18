@@ -95,12 +95,10 @@ function transformEntity(h: CreateElement, entity: Entity, ctx: RenderContext) {
     case "codeblock": {
       const lang = entity.params.lang;
       const value = sliceText(ctx, entity.innerSpan);
-      return h(CodeBlock, { props: { lang, value } })
+      return h(CodeBlock, { props: { lang, value } });
     }
     case "spoiler": {
-      return (
-        <Spoiler>{transformEntities(h, entity, ctx)}</Spoiler>
-      )
+      return <Spoiler>{transformEntities(h, entity, ctx)}</Spoiler>;
     }
     case "blockquote": {
       return <blockquote>{transformEntities(h, entity, ctx)}</blockquote>;
@@ -127,6 +125,22 @@ function transformEntity(h: CreateElement, entity: Entity, ctx: RenderContext) {
       const url = sliceText(ctx, entity.innerSpan);
       return h(Link, { props: { url } });
     }
+    case "color": {
+      const { color } = entity.params;
+      const lastCount = ctx.textCount;
+      let el;
+      if (color.startsWith("#")) {
+        el = h("span", { style: { color } }, transformEntities(h, entity, ctx));
+      } else {
+        el = transformEntities(h, entity, ctx);
+      }
+
+      if (lastCount !== ctx.textCount) {
+        return el;
+      } else {
+        return sliceText(ctx, entity.outerSpan);
+      }
+    }
     default: {
       throw new UnreachableCaseError(entity);
     }
@@ -144,11 +158,11 @@ function transformCustomEntity(
   const expr = sliceText(ctx, entity.innerSpan, { countText: false });
   switch (type) {
     case "@": {
-      let user = ctx.props.message?.mentions?.find(m => m.id === expr)
+      let user = ctx.props.message?.mentions?.find(m => m.id === expr);
       if (!user) {
         user = UsersModule.users[expr];
       }
-      
+
       if (user) {
         ctx.textCount += expr.length;
         return h(MentionUser, {

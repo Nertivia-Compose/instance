@@ -47,9 +47,16 @@ import { Component, Vue } from "vue-property-decorator";
 import CustomButton from "@/components/CustomButton.vue";
 import EmojiTemplate from "./EmojiTemplate.vue";
 import { PopoutsModule } from "@/store/modules/popouts";
-import path from "path";
 import emojiParser from "@/utils/emojiParser";
 import { uploadEmoji } from "@/services/emojiService";
+
+function basename(path: string) {
+  return path.substring(path.lastIndexOf("/") + 1);
+}
+
+function extname(path: string) {
+  return path.substring(path.lastIndexOf("/") + 1, path.length);
+}
 
 @Component({ components: { EmojiTemplate, CustomButton } })
 export default class ManageEmojis extends Vue {
@@ -64,7 +71,7 @@ export default class ManageEmojis extends Vue {
     const allowedFormats = [".png", ".jpeg", ".gif", ".jpg"];
     for (let index = 0; index < files.length; index++) {
       const file = files[index];
-      if (!allowedFormats.includes(path.extname(file.name).toLowerCase())) {
+      if (!allowedFormats.includes(extname(file.name).toLowerCase())) {
         this.showError(`Upload failed - ${file.name} Unsupported image type.`);
         break;
       }
@@ -102,7 +109,7 @@ export default class ManageEmojis extends Vue {
     });
   }
   uploadEmoji(file: File, reader: FileReader) {
-    let name = path.basename(file.name, path.extname(file.name));
+    let name = basename(file.name);
     name = this.uploadEmojiName(name);
     return uploadEmoji(name, reader.result as any);
   }

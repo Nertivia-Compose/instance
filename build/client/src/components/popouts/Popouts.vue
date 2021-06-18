@@ -13,12 +13,15 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { PopoutsModule } from "@/store/modules/popouts";
-import FloatingProfileCard from "./FloatingProfileCard.vue";
 
 const components = {
   ProfilePopout: () =>
     import(
       /* webpackChunkName: "ProfilePopout" */ "@/components/popouts/profile-popout/ProfilePopout.vue"
+    ),
+  MarkupGuide: () =>
+    import(
+      /* webpackChunkName: "MarkupGuide" */ "@/components/popouts/markup-guide/MarkupGuide.vue"
     ),
   EditRolesPopout: () =>
     import(
@@ -112,6 +115,10 @@ const components = {
   MessageReactionEmojiPicker: () =>
     import(
       /* webpackChunkName: "MessageReactionEmojiPicker" */ "@/components/popouts/MessageReactionEmojiPicker.vue"
+    ),
+  ReactedUsersPreview: () =>
+    import(
+      /* webpackChunkName: "ReactedUsersPreview" */ "@/components/popouts/ReactedUsersPreview.vue"
     )
 };
 

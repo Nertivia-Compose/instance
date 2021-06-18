@@ -11,6 +11,7 @@
   "dependencies": {
     "@hcaptcha/vue-hcaptcha": "^0.3.0",
     "@simonwep/pickr": "^1.8.0",
+    "base64-arraybuffer": "^0.1.4",
     "core-js": "^3.6.5",
     "filesize": "^3.6.1",
     "firebase": "^8.2.9",
@@ -18,10 +19,10 @@
     "jsonhtmlfyer": "^0.2.1",
     "ky": "^0.27.0",
     "match-sorter": "^6.3.0",
-    "nertivia-markup": "^0.9.1",
+    "nertivia-markup": "^0.10.1",
     "pako": "^1.0.11",
     "register-service-worker": "^1.7.1",
-    "seeded-color": "^1.0.1",
+    "seeded-color": "^1.0.2",
     "socket.io-client": "^2.4.0",
     "text-field-edit": "^3.1.0",
     "twemoji": "^13.0.1",
@@ -39,16 +40,16 @@
     "vuex-module-decorators": "^1.0.1"
   },
   "devDependencies": {
+    "@types/highlight.js": "^10.1.0",
     "@types/pako": "^1.0.1",
     "@types/twemoji": "^12.1.1",
-    "@types/highlight.js": "^10.1.0",
-    "@typescript-eslint/eslint-plugin": "^2.33.0",
-    "@typescript-eslint/parser": "^2.33.0",
-    "@vue/cli-plugin-babel": "~4.5.0",
+    "@typescript-eslint/eslint-plugin": "^4.27.0",
+    "@typescript-eslint/parser": "^4.27.0",
+    "@vue/cli-plugin-babel": "~4.5.13",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-pwa": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.13",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/eslint-config-prettier": "^6.0.0",
@@ -59,7 +60,7 @@
     "prettier": "^1.19.1",
     "sass": "^1.32.8",
     "sass-loader": "^8.0.2",
-    "typescript": "~3.9.3",
+    "typescript": "4.1.6",
     "vue-cli-plugin-i18n": "~2.1.0",
     "vue-template-compiler": "^2.6.11"
   },
@@ -84,7 +85,8 @@
       "@typescript-eslint/camelcase": "off",
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-var-requires": 0,
-      "@typescript-eslint/no-use-before-define": "warn"
+      "@typescript-eslint/no-use-before-define": "warn",
+      "@typescript-eslint/explicit-module-boundary-types": "off"
     }
   },
   "browserslist": [

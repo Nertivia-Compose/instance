@@ -1,6 +1,7 @@
 import wrapper from "./wrapper";
 import Message from "@/interfaces/Message";
 import Vue from "vue";
+import User from "@/interfaces/User";
 
 const socket: () => SocketIOClient.Socket = () => Vue.prototype.$socket.client;
 
@@ -42,11 +43,10 @@ export function fetchMessagesAround(
     .json();
 }
 
-
 export interface PostReaction {
-  emojiID?: string,
-  gif?: boolean,
-  unicode?: string
+  emojiID?: string;
+  gif?: boolean;
+  unicode?: string;
 }
 
 export function addReaction(
@@ -55,7 +55,28 @@ export function addReaction(
   reaction: PostReaction
 ): Promise<any> {
   return wrapper()
-    .post(`messages/${messageID}/channels/${channelID}/reactions`, {json: reaction})
+    .post(`messages/${messageID}/channels/${channelID}/reactions`, {
+      json: reaction
+    })
+    .json();
+}
+export function getReactedUsers(
+  channelID: string,
+  messageID: string,
+  limit: number,
+  emojiID?: string,
+  unicode?: string
+): Promise<User[]> {
+  const searchParams: any = { limit };
+  if (emojiID) {
+    searchParams.emojiID = emojiID;
+  } else {
+    searchParams.unicode = unicode;
+  }
+  return wrapper()
+    .get(`messages/${messageID}/channels/${channelID}/reactions/users`, {
+      searchParams
+    })
     .json();
 }
 export function removeReaction(
@@ -64,7 +85,9 @@ export function removeReaction(
   reaction: PostReaction
 ): Promise<any> {
   return wrapper()
-    .delete(`messages/${messageID}/channels/${channelID}/reactions`, {json: reaction})
+    .delete(`messages/${messageID}/channels/${channelID}/reactions`, {
+      json: reaction
+    })
     .json();
 }
 
