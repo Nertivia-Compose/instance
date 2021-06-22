@@ -55,7 +55,7 @@ function basename(path: string) {
 }
 
 function extname(path: string) {
-  return path.substring(path.lastIndexOf("/") + 1, path.length);
+  return path.substring(path.lastIndexOf("."), path.length);
 }
 
 @Component({ components: { EmojiTemplate, CustomButton } })
@@ -72,6 +72,7 @@ export default class ManageEmojis extends Vue {
     for (let index = 0; index < files.length; index++) {
       const file = files[index];
       if (!allowedFormats.includes(extname(file.name).toLowerCase())) {
+        // TODO: localize this
         this.showError(`Upload failed - ${file.name} Unsupported image type.`);
         break;
       }

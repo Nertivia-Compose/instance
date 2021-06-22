@@ -23,15 +23,13 @@
           :style="{
             transitionDelay: server && server.banner ? '0.2s' : '0.1s'
           }"
-        > 
-        <li 
-          v-for="channel in selectedServerChannels"
-          :key="channel.channelID"
         >
-          <ChannelTemplate
-            :channel="channel"
-          />
-        </li>
+          <li
+            v-for="channel in selectedServerChannels"
+            :key="channel.channelID"
+          >
+            <ChannelTemplate :channel="channel" />
+          </li>
         </ul>
       </div>
     </transition>
@@ -231,21 +229,33 @@ export default class ServerDrawer extends Vue {
   opacity: 0;
 }
 
-.server-drawer, .bottom, .channels {
-  height: 100%;
+.server-drawer {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 250px;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.server-drawer,
+.bottom,
+.channels {
+  flex: 1;
 }
 
 .channels {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  
-  width: 250px;
-  
+
   padding: 0;
 
   list-style: none;
-  overflow: hidden;
 }
 
 .server-banner {
@@ -262,6 +272,7 @@ export default class ServerDrawer extends Vue {
     height: 100%;
   }
 }
+
 @media (max-width: 950px) {
   .server-drawer {
     padding-bottom: 56px;
