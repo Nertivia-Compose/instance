@@ -19,11 +19,14 @@ import {
   changeCssVar,
   setThemeColor
 } from "@/utils/customCssVars";
-import { PopoutsModule } from "./store/modules/popouts";
+import { applyFont } from "./utils/applyFont";
+import fonts from "@/utils/fonts.json";
 
 @Component({ components: { WindowControl, Popouts } })
 export default class App extends Vue {
   mounted() {
+    // applyfont
+    applyFont(localStorage["font"] || Object.values(fonts)[0].id);
     // set custom css colors
     const customVars = getCustomCssVars();
     for (let i = 0; i < Object.keys(customVars).length; i++) {
@@ -48,14 +51,11 @@ export default class App extends Vue {
 <style lang="scss">
 body {
   margin: 0;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: white;
 }
-textarea {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-}
+
 html,
 body,
 .root {
