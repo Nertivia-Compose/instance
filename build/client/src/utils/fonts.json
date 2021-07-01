@@ -10,17 +10,17 @@
     "stylesheet": "https://fonts.googleapis.com/css2?family=Roboto&display=swap",
     "css": "'Roboto', sans-serif"
   },
-  "roboto": {
-    "name": "Roboto",
-    "id": "roboto",
-    "stylesheet": "https://fonts.googleapis.com/css2?family=Roboto&display=swap",
-    "css": "'Roboto', sans-serif"
-  },
   "inter": {
     "name": "Inter",
     "id": "inter",
     "stylesheet": "https://fonts.googleapis.com/css2?family=Inter&display=swap",
     "css": "'Inter', sans-serif"
+  },
+  "press-start-2p": {
+    "name": "Press Start 2P",
+    "id": "press-start-2p",
+    "stylesheet": "https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap",
+    "css": "'Press Start 2P', cursive"
   },
   "bree-serif": {
     "name": "Bree Serif",
