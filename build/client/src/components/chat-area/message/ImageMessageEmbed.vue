@@ -1,89 +1,45 @@
 <template>
   <div
     class="image-embed"
-    :class="{ animate: isWindowFocused && !loadImage }"
+    :class="{ animate: isWindowFocused }"
     @click="onClick"
   >
     <div class="outer-content">
       <div class="inner-content" ref="content">
         <div class="gif" v-if="isGif">GIF</div>
-        <img v-if="loadImage" :src="pauseGifURL" />
+        <img
+          :src="pauseGifURL"
+          :class="{ loaded }"
+          :width="dimensions.width"
+          :height="dimensions.height"
+          loading="lazy"
+          @load="loaded = true"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import windowProperties from "@/utils/windowProperties";
 import Message from "@/interfaces/Message";
-import resizeKeepAspect from "@/utils/resizeKeepAspect";
 import { PopoutsModule } from "@/store/modules/popouts";
 @Component
 export default class ImageMessageEmbed extends Vue {
   @Prop() private message!: Message & { grouped: boolean };
-  loadImage = false;
-  intersectObserver: IntersectionObserver | null = null;
+  loaded = false;
 
-  mounted() {
-    const contentEl = this.$refs["content"] as any;
-
-    this.setDimensions();
-
-    this.intersectObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          this.fetchImage();
-          this.intersectObserver?.unobserve(contentEl);
-          this.intersectObserver?.disconnect();
-        }
-      });
-    });
-    this.intersectObserver.observe(contentEl);
-  }
-  beforeDestroy() {
-    const contentEl = this.$refs["content"] as any;
-
-    this.intersectObserver?.unobserve(contentEl);
-    this.intersectObserver?.disconnect();
-  }
   onClick() {
     PopoutsModule.ShowPopout({
       id: "image-preview-popout",
       component: "image-preview-popout",
       data: {
-        url: this.imageURL,
-        dimensions: this.dimensions
+        url: this.imageURL
       }
     });
   }
-  fetchImage() {
-    const image = new Image();
-    image.onload = () => {
-      image.onload = null;
-      this.loadImage = true;
-    };
-    image.src = this.pauseGifURL || "";
-  }
 
-  @Watch("windowSize")
-  setDimensions() {
-    const contentEl = this.$refs["content"] as any;
-    const logsEl = document.getElementById("messageLogs");
-    if (!this.dimensions) return;
-    if (!contentEl) return;
-    if (!logsEl) return;
-    resizeKeepAspect(
-      contentEl,
-      logsEl,
-      this.dimensions.width,
-      this.dimensions.height
-    );
-  }
-
-  get dimensions() {
-    return this.message.files?.[0]?.dimensions;
-  }
   get isWindowFocused() {
     return windowProperties.isFocused;
   }
@@ -95,9 +51,11 @@ export default class ImageMessageEmbed extends Vue {
     }
     return url;
   }
+
   get isGif() {
     return this.imageURL?.endsWith(".gif");
   }
+
   get imageURL() {
     const file = this.message.files?.[0];
     if (!file) return undefined;
@@ -109,11 +67,9 @@ export default class ImageMessageEmbed extends Vue {
       `/media/${file.fileID}/${file.fileName}`
     );
   }
-  get windowSize() {
-    return {
-      height: windowProperties.resizeHeight,
-      width: windowProperties.resizeWidth
-    };
+
+  get dimensions() {
+    return this.message.files?.[0]?.dimensions;
   }
 }
 </script>
@@ -124,8 +80,7 @@ export default class ImageMessageEmbed extends Vue {
   position: relative;
   border-radius: 4px;
   background: rgba(0, 0, 0, 0.4);
-  min-width: 200px;
-  min-height: 200px;
+
   overflow: hidden;
   cursor: pointer;
   &:hover {
@@ -143,19 +98,36 @@ export default class ImageMessageEmbed extends Vue {
     }
   }
 }
-.inner-content {
-  display: flex;
-}
+
 .outer-content {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 200px;
 }
+
+.inner-content {
+  display: grid;
+}
+
 img {
+  display: grid;
+
+  height: auto;
+
+  min-width: 200px;
+  min-height: 200px;
+
+  max-width: 500px;
+  max-height: 500px;
+
+  object-fit: contain;
+}
+
+img.loaded {
   width: 100%;
   height: 100%;
 }
+
 .image-embed:hover {
   .gif {
     opacity: 0;
