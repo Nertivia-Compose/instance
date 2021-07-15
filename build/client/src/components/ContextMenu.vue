@@ -105,11 +105,12 @@ export default class extends Vue {
   }
 
   get itemsWithExtras() {
-    const selectionElement = this.selection?.focusNode?.parentElement;
-    if (selectionElement !== this.element) return this.items;
-    if (!this.selection?.toString()?.trim()) {
-      return this.items;
-    }
+    if (!this.element) return this.items;
+    const clickedElementSelected =
+      this.selection?.toString().length &&
+      this.selection.containsNode(this.element, true);
+
+    if (!clickedElementSelected) return this.items;
     const seperator: ItemsProp = {
       type: "seperator"
     };
@@ -159,7 +160,7 @@ export default class extends Vue {
   background: var(--context-menu-bg-color);
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
   position: absolute;
-  border-radius: 4px;
+  border-radius: 8px;
   overflow: hidden;
   z-index: 99999999999;
 }
@@ -169,6 +170,8 @@ export default class extends Vue {
   opacity: 0;
   animation: showUp 0.2s;
   animation-fill-mode: forwards;
+  gap: 5px;
+  padding: 5px;
 }
 @keyframes showUp {
   from {
@@ -187,6 +190,7 @@ export default class extends Vue {
   transition: 0.2s;
   padding: 8px;
   padding-top: 5px;
+  border-radius: 4px;
   padding-bottom: 5px;
   display: flex;
   align-content: center;

@@ -1,5 +1,26 @@
 [
 	{
+		"version": "1.40.6-stable",
+		"date": "15 July 2021",
+		"title": "Updates To Changelog",
+		"image_url": "/img/changelog/preview-test-1.40.6.png",
+		"new": "Changelog can now contain preview images/GIFs",
+		"changes": "Updated changelog Design"
+	},
+	{
+		"version": "1.40.5-stable",
+		"date": "14 July 2021",
+		"title": "Small Improvements and fixes",
+		"new": "You can now highlight and copy messages in the desktop app.",
+		"fixes": "URL embeded images would not load."
+	},
+	{
+		"version": "1.40.4-stable",
+		"date": "13 July 2021",
+		"title": "Small Visual Changes",
+		"changes": "Input box, drop down menu and context menu slight design changes"
+	},
+	{
 		"version": "1.40.3-stable",
 		"date": "7 July 2021",
 		"title": "Cache Input",
@@ -13,7 +34,7 @@
 			"Links surrounded with < and > like <https://example.com> will hide the containing characters and the embed",
 			"Added a new markup expression to allow for vertical text"
 		],
-		"body": "The new markup can be used like<pre><code>[vertical: text that is vertical  two spaces indicate a newline ]</code></pre>"
+		"body": "The new markup can be used like: <br><span style='background: #ffffff14;border-radius: 4px;padding: 3px;display: inline-block;'>[vertical: text that is vertical  two spaces indicate a newline ]</span>"
 	},
 	{
 		"version": "1.40.1-stable",
