@@ -91,6 +91,7 @@
         :image-id="me.avatar"
         :seed-id="me.id"
       />
+      <div class="title">{{ me.username }}</div>
     </div>
 
     <div
@@ -240,8 +241,14 @@ export default class NavBar extends Vue {
   border-radius: 0;
   position: relative;
   .title {
-    font-size: 12px;
-    display: none;
+    font-size: 9px;
+    text-align: center;
+    margin-top: 3px;
+    overflow-wrap: anywhere;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   &:hover {
     opacity: 1;
@@ -256,6 +263,9 @@ export default class NavBar extends Vue {
     border-radius: 4px;
     background: var(--success-color);
   }
+  &.me {
+    height: initial;
+  }
   &.me.selected {
     background-color: transparent;
     transform: scale(1.3);
@@ -265,7 +275,7 @@ export default class NavBar extends Vue {
       content: "";
       color: white;
       position: absolute;
-      bottom: 10px;
+      bottom: 18px;
       right: 13px;
       background-color: var(--alert-color);
       border-radius: 50%;
@@ -279,11 +289,12 @@ export default class NavBar extends Vue {
       align-items: center;
       align-content: center;
       justify-content: center;
-      font-size: 12px;
-      width: 20px;
-      height: 20px;
-      bottom: 5px;
-      right: 10px;
+
+      right: 13px;
+      bottom: 17px;
+      font-size: 10px;
+      height: 15px;
+      width: 15px;
     }
   }
 }
@@ -335,26 +346,12 @@ export default class NavBar extends Vue {
     min-width: 50px;
     margin: 0px;
     margin-right: 3px;
-    .icon {
-      font-size: 19px;
-      margin-bottom: 3px;
-    }
     &.notification {
       &::before {
         bottom: 20px;
         right: 15px;
       }
-      &.mentioned::before {
-        right: 13px;
-        bottom: 17px;
-        font-size: 10px;
-        height: 15px;
-        width: 15px;
-      }
     }
-  }
-  .item .title {
-    display: block;
   }
   .user-area {
     bottom: 60px;
@@ -375,8 +372,8 @@ export default class NavBar extends Vue {
   height: 10px;
   width: 10px;
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  margin-left: 17px;
+  margin-top: 10px;
   z-index: 1;
 }
 </style>
